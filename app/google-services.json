@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "829319451827",
+    "project_id": "voluntariei",
+    "storage_bucket": "voluntariei.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829319451827:android:004c811b69b8d72cd5ccc6",
+        "android_client_info": {
+          "package_name": "com.facens.acedevelop.voluntariei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829319451827-tfgefhum8ue85agf6sitn4kuhu4jpqoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsyE7mMyax0p5mEAyJQlRWx6B_7vfuH-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829319451827-tfgefhum8ue85agf6sitn4kuhu4jpqoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

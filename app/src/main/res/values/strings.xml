@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Voluntariei</string>
+    <string name="Profile">Perfil</string>
+    <string name="Menu">Menu</string>
+    <string name="Notifications">Notificações</string>
+    <string name="Help">Ajuda</string>
+    <string name="MyData">Meus dados</string>
+    <string name="About">Sobre o aplicativo</string>
+    <string name="DeleteAccount">Deletar conta</string>
+    <string name="Quit">Sair</string>
+    <string name="Send">Enviar</string>
+    <string name="EnterWithUser">Entrar como usuário</string>
+    <string name="EnterWithONG">Entrar como ONG</string>
+    <string name="Register">Cadastrar-se</string>
+    <string name="EmailLogin">Login Email</string>
+    <string name="MoreOptions">Mais Opções</string>
+    <string name="RealizeYourLogin">Realize seu login com uma das seguintes opções</string>
+    <string name="Wellcome">Seja bem vindo ao voluntariei, como deseja realizar seu login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="LoginFace">Login com Facebook</string>
+    <string name="LoginGoogle">Login com google</string>
+</resources>
