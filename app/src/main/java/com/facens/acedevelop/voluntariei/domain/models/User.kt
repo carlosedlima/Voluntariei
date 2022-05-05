@@ -1,12 +1,12 @@
 package com.facens.acedevelop.voluntariei.domain.models
 
-import java.util.Date
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class User(
-    val id:Int,
-    val name:String,
-    val email:String,
-    val password:String,
-    val cpf:String,
-    val dataNascimento:Date,
-)
+    @SerializedName("id") val id: Int?,
+    @SerializedName("nome") val name:String,
+    @SerializedName("email") val email:String,
+    @SerializedName("senha") val password:String,
+    @SerializedName("cpf") val cpf:String,
+):Serializable

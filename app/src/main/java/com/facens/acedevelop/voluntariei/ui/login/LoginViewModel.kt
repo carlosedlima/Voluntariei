@@ -1,4 +1,8 @@
 package com.facens.acedevelop.voluntariei.ui.login
 
-class LoginViewModel {
+import androidx.lifecycle.ViewModel
+
+class LoginViewModel: ViewModel()  {
+
+
 }

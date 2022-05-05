@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.facens.acedevelop.voluntariei.R
 import com.facens.acedevelop.voluntariei.databinding.NotificationFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NotificationFragment : Fragment() {
 
     companion object {

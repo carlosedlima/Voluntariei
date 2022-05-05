@@ -7,22 +7,24 @@ import com.facens.acedevelop.voluntariei.data.interfaces.EventoInterface
 import com.facens.acedevelop.voluntariei.data.interfaces.HelpInterface
 import com.facens.acedevelop.voluntariei.domain.models.Evento
 import com.facens.acedevelop.voluntariei.domain.models.Help
+import retrofit2.Retrofit
+import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
-class RetrofitEventoDataSource(
-    val request:Request
+class RetrofitEventoDataSource @Inject constructor(
+    private val request:Retrofit
 ) : EventoDataSource {
     override suspend fun getEvents(): List<Evento> {
         return suspendCoroutine { continuation ->
-            request.create(EventoInterface::class.java).getHelps().listen(
+            request.create(EventoInterface::class.java).getEvent().listen(
                 onSuccess = { response ->
                     if (response.isSuccessful){
-                        val helps = mutableListOf<Help>()
-                        response.body()?.forEach { help ->
-                            helps.add(help)
+                        val events = mutableListOf<Evento>()
+                        response.body()?.forEach { evento ->
+                            events.add(evento)
                         }
 
-                        continuation.resumeWith(Result.success(helps))
+                        continuation.resumeWith(Result.success(events))
                     }
                 },
                 onError = {

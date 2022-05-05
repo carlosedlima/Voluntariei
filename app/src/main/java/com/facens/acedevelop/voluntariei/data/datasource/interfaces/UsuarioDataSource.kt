@@ -8,6 +8,6 @@ interface UsuarioDataSource {
 
     suspend fun getUser(id:Int):User
 
-    suspend fun deleteUser(id: Int):User
+    suspend fun deleteUser(id: Int):Boolean
 
 }

@@ -11,7 +11,7 @@
     <string name="Send">Enviar</string>
     <string name="EnterWithUser">Entrar como usuário</string>
     <string name="EnterWithONG">Entrar como ONG</string>
-    <string name="Register">Cadastrar-se</string>
+    <string name="Register">Cadastrar</string>
     <string name="EmailLogin">Login Email</string>
     <string name="MoreOptions">Mais Opções</string>
     <string name="RealizeYourLogin">Realize seu login com uma das seguintes opções</string>
@@ -20,4 +20,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="LoginFace">Login com Facebook</string>
     <string name="LoginGoogle">Login com google</string>
+    <string name="ConfirmPass">Confirmar Senha</string>
+    <string name="Pass">Senha</string>
+    <string name="CPF">CPF</string>
+    <string name="CNPJ">CNPJ</string>
+    <string name="Name">Nome Completo</string>
+    <string name="NameOng">Nome Fantasia</string>
+    <string name="Email">Email</string>
+    <string name="Enter">Entrar</string>
+    <string name="field_error">Campo obrigatório</string>
 </resources>

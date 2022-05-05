@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +17,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
             android:orientation="vertical"
-            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
             >
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/EmailLayout"
@@ -35,33 +34,7 @@
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/NomeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:boxBackgroundColor="@color/white_gray">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Nome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/DocumentoLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:boxBackgroundColor="@color/white_gray">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Documento"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/SenhaLayout"
@@ -77,26 +50,13 @@
                     android:hint="@string/Pass" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ConfirmarLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:boxBackgroundColor="@color/white_gray">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ConfirmarSenha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/ConfirmPass" />
-            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/Cadastrar"
+        android:id="@+id/Logar"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="16dp"
@@ -104,11 +64,12 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/background_blue_button"
         android:fontFamily="@font/share_tech"
-        android:text="@string/Register"
+        android:text="@string/Enter"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

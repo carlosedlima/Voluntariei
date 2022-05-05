@@ -11,7 +11,9 @@ import com.facens.acedevelop.voluntariei.databinding.ProfileFragmentBinding
 import com.facens.acedevelop.voluntariei.ui.aboutapp.AboutActivity
 import com.facens.acedevelop.voluntariei.ui.help.HelpActivity
 import com.facens.acedevelop.voluntariei.ui.mydata.MyDataActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     companion object {
@@ -46,7 +48,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.DeleteAccountButton.setOnClickListener {
-            var builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(context)
             builder.setTitle("Deseja realmente deletar sua conta ?")
             builder.setPositiveButton("Sim") { dialog, _ ->
                 dialog.cancel()
@@ -59,8 +61,8 @@ class ProfileFragment : Fragment() {
         }
 
         binding.QuitButton.setOnClickListener {
-            var builder = AlertDialog.Builder(context)
-            builder.setTitle("Deseja realmente deletar sua conta ?")
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Deseja realmente sair de sua conta ?")
             builder.setPositiveButton("Sim") { dialog, _ ->
                 dialog.cancel()
             }

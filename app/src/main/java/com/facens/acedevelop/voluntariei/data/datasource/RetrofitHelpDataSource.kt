@@ -1,15 +1,17 @@
 package com.facens.acedevelop.voluntariei.data.datasource
 
+import android.util.Log
 import com.facens.acedevelop.voluntariei.data.di.Request
 import com.facens.acedevelop.voluntariei.data.datasource.interfaces.HelpDataSource
 import com.facens.acedevelop.voluntariei.data.di.Request.listen
 import com.facens.acedevelop.voluntariei.data.interfaces.HelpInterface
 import com.facens.acedevelop.voluntariei.domain.models.Help
+import retrofit2.Retrofit
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
 class RetrofitHelpDataSource @Inject constructor(
-    val request: Request
+    private val request: Retrofit
 ) : HelpDataSource {
 
      override suspend fun getHelps(): List<Help> {
@@ -22,12 +24,12 @@ class RetrofitHelpDataSource @Inject constructor(
                         response.body()?.forEach { help ->
                             helps.add(help)
                         }
-
                         continuation.resumeWith(Result.success(helps))
                     }
                },
                onError = {
                    continuation.resumeWith(Result.failure(it))
+                   Log.d("HelpRequest", "GetError$it")
                }
            )
         }

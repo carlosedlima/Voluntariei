@@ -7,5 +7,5 @@ import javax.inject.Inject
 class HelpRepository @Inject constructor(
     private val  dataSource: HelpDataSource
 ) {
-    suspend fun getHelp():List<Help> = dataSource.getHelps()
+    suspend fun getHelps():List<Help> = dataSource.getHelps()
 }

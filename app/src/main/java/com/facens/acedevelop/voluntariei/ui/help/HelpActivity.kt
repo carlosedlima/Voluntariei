@@ -6,7 +6,9 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facens.acedevelop.voluntariei.databinding.ActivityHelpBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HelpActivity : AppCompatActivity() {
 
     private var _binding: ActivityHelpBinding? = null

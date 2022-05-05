@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="@id/ContainerSearch"
         app:layout_constraintStart_toStartOf="@id/ContainerSearch"
         app:layout_constraintBottom_toBottomOf="@id/ContainerSearch"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         app:srcCompat="@drawable/ic_lupa"
         />
 

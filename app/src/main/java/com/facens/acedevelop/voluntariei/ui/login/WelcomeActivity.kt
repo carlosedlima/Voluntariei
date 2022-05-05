@@ -6,7 +6,9 @@ import android.os.Bundle
 import com.facens.acedevelop.voluntariei.databinding.ActivityWelcomeBinding
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.MODE
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.ONG
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WelcomeActivity : AppCompatActivity() {
     private var _binding: ActivityWelcomeBinding? = null
     private val binding get() = _binding!!
@@ -17,13 +19,13 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.LoginOng.setOnClickListener {
-            val i = Intent(this,LoginActivty::class.java)
+            val i = Intent(this,ModeActivity::class.java)
             i.putExtra(MODE, ONG)
             startActivity(i)
         }
 
         binding.LoginUser.setOnClickListener {
-            val i = Intent(this,LoginActivty::class.java)
+            val i = Intent(this,ModeActivity::class.java)
             startActivity(i)
         }
 

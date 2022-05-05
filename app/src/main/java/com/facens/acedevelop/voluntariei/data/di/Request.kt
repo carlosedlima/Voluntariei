@@ -1,6 +1,5 @@
 package com.facens.acedevelop.voluntariei.data.di
 
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,34 +18,24 @@ import javax.inject.Singleton
 object Request {
 
 
+    private val request: Retrofit.Builder= Retrofit.Builder()
 
-    private val request: Retrofit
-
-
-    init {
-        request = createRetrofit().run {
-            baseUrl("http://localhost:8090")
-            build()
-        }
-
-    }
-
-    fun <T> create(clazz: Class<T>): T = request.create(clazz)
-
-    private fun createRetrofit(): Retrofit.Builder {
-        val gson = GsonBuilder()
-            .create()
-        return Retrofit.Builder().apply {
-            addConverterFactory(GsonConverterFactory.create(gson))
-            client(OkHttpClient.Builder().run {
+    @Provides
+    @Singleton
+    fun providesRetrofit():Retrofit{
+        return request
+            .baseUrl("http://localhost:8090")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().run {
                 callTimeout(10L, TimeUnit.SECONDS)
                 connectTimeout(10L, TimeUnit.SECONDS)
                 readTimeout(10L, TimeUnit.SECONDS)
                 writeTimeout(10L, TimeUnit.SECONDS)
                 build()
             })
-        }
+            .build()
     }
+
 
     inline fun <T> Call<T>.listen(crossinline onSuccess: (response: Response<T>) -> Unit = {}, crossinline onError: (Throwable) -> Unit = {}) {
         this.enqueue(object : Callback<T> {

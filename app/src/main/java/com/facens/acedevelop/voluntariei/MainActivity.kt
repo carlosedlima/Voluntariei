@@ -8,7 +8,9 @@ import com.facens.acedevelop.voluntariei.databinding.MainActivityBinding
 import com.facens.acedevelop.voluntariei.ui.home.HomeFragment
 import com.facens.acedevelop.voluntariei.ui.notifications.NotificationFragment
 import com.facens.acedevelop.voluntariei.ui.profile.ProfileFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding: MainActivityBinding? = null
