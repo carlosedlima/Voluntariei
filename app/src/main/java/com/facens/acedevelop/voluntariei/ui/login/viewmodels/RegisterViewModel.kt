@@ -1,4 +1,4 @@
-package com.facens.acedevelop.voluntariei.ui.login
+package com.facens.acedevelop.voluntariei.ui.login.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -70,17 +70,16 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    fun createOng(name:String,email:String,pass:String,document:String)=viewModelScope.launch {
+    fun createOng(name:String,email:String,pass:String)=viewModelScope.launch {
         isFormValid =true
 
         _nameFieldErrorResId.value = getErrorStringResIdIfEmpty(name)
-        _documentFieldErrorResId.value = getErrorStringResIdIfEmpty(document)
         _emailFieldErrorResId.value = getErrorStringResIdIfEmpty(email)
         _passFieldErrorResId.value = getErrorStringResIdIfEmpty(pass)
 
         if (isFormValid){
             try {
-                val ong = ongUseCase.registerOng(ONG(1,name,email,pass,document))
+                val ong = ongUseCase.registerOng(ONG(1,name,email,pass))
                 _ongCreated.value = ong
             }catch (e:Exception){
                 Log.d("RegisterUser",e.toString())

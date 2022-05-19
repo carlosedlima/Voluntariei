@@ -7,6 +7,8 @@ import com.facens.acedevelop.voluntariei.data.di.Request
 import com.facens.acedevelop.voluntariei.data.di.Request.listen
 import com.facens.acedevelop.voluntariei.data.interfaces.OngInterface
 import com.facens.acedevelop.voluntariei.data.interfaces.UsuarioInterface
+import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
+import com.facens.acedevelop.voluntariei.domain.models.LoginResponse
 import com.facens.acedevelop.voluntariei.domain.models.User
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -47,6 +49,48 @@ class RetrofitUsuarioDataSource @Inject constructor(
     }
 
     override suspend fun deleteUser(id: Int): Boolean {
-        TODO("Not yet implemented")
+        return  suspendCoroutine { continuation ->
+            request.create(OngInterface::class.java).deleteOng(id).listen(
+                onSuccess = {response ->
+                    if (response.isSuccessful){
+                        continuation.resumeWith(Result.success(true))
+                    }
+                },
+                onError = {error ->
+                    continuation.resumeWith(Result.failure(error))
+                }
+            )
+        }
+    }
+
+    override suspend fun login(login:LoginRequest): User? {
+        return suspendCoroutine { continuation ->
+            request.create(UsuarioInterface::class.java).loginUser(login).listen(
+                onSuccess = { response ->
+                    if (response.isSuccessful) {
+                        val user:User? = response.body()
+                        continuation.resumeWith(Result.success(user))
+                    }
+                } ,
+                onError = {
+                    continuation.resumeWith(Result.failure(it))
+                }
+            )
+        }
+    }
+
+    override suspend fun updateUser(user: User): User {
+        return  suspendCoroutine { continuation ->
+            request.create(UsuarioInterface::class.java).updateUser(user.id!!).listen(
+                onSuccess = { response ->
+                    if (response.isSuccessful){
+                        continuation.resumeWith(Result.success(user))
+                    }
+                },
+                onError = {
+                    continuation.resumeWith(Result.failure(it))
+                }
+            )
+        }
     }
 }

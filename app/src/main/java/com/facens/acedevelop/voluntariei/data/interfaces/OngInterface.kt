@@ -1,7 +1,10 @@
 package com.facens.acedevelop.voluntariei.data.interfaces
 
 import androidx.lifecycle.MutableLiveData
+import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
+import com.facens.acedevelop.voluntariei.domain.models.LoginResponse
 import com.facens.acedevelop.voluntariei.domain.models.ONG
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -18,4 +21,7 @@ interface OngInterface {
 
     @PUT("/ong/{id}")
     fun updateOng(@Path("id")id: Int):Call<MutableLiveData<ONG>>
+
+    @POST("/ong/login")
+    fun loginOng(@Body login: LoginRequest):Call<ONG>
 }

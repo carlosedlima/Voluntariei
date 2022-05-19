@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="@id/ContainerSearch"
         app:layout_constraintStart_toStartOf="@id/ContainerSearch"
         app:layout_constraintBottom_toBottomOf="@id/ContainerSearch"
-        android:layout_marginStart="10dp"
+        android:layout_margin="15dp"
         app:srcCompat="@drawable/ic_lupa"
         />
 
@@ -42,8 +42,8 @@
         android:maxLines="1"
         />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/Swipe"
+    <RelativeLayout
+        android:id="@+id/Container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/ContainerSearch"
@@ -56,8 +56,18 @@
             android:id="@+id/RecyclerPrincipal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            tools:listitem="@layout/card_evento"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/Adicionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:backgroundTint="@color/blue_2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="20dp"
             />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

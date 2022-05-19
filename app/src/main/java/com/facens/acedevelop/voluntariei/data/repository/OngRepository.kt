@@ -1,6 +1,8 @@
 package com.facens.acedevelop.voluntariei.data.repository
 
 import com.facens.acedevelop.voluntariei.data.datasource.interfaces.OngDataSource
+import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
+import com.facens.acedevelop.voluntariei.domain.models.LoginResponse
 import com.facens.acedevelop.voluntariei.domain.models.ONG
 import javax.inject.Inject
 
@@ -13,5 +15,5 @@ class OngRepository @Inject constructor(
 
     suspend fun deleteOng(id: Int): Boolean = dataSource.deleteOng(id)
 
-    suspend fun loginOng(email:String,pass:String):Boolean = TODO()
+    suspend fun loginOng(login: LoginRequest):ONG? = dataSource.login(login)
 }

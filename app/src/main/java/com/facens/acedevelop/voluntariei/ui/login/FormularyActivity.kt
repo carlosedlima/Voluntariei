@@ -2,16 +2,12 @@ package com.facens.acedevelop.voluntariei.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.facens.acedevelop.voluntariei.R
 import com.facens.acedevelop.voluntariei.databinding.ActivityFormularyBinding
+import com.facens.acedevelop.voluntariei.ui.login.viewmodels.RegisterViewModel
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.MODE
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.ONG
-import com.facens.acedevelop.voluntariei.utils.isCPF
-import com.facens.acedevelop.voluntariei.utils.isEmail
-import com.facens.acedevelop.voluntariei.utils.isName
-import com.facens.acedevelop.voluntariei.utils.isPassword
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +27,7 @@ class FormularyActivity : AppCompatActivity() {
         val mode: String = intent.extras?.get(MODE).toString()
 
         configScreen(mode)
+        observerVMEvents()
     }
 
     private fun configScreen(mode: String) {

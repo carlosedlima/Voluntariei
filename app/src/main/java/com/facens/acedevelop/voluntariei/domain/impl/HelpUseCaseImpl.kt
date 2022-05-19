@@ -8,8 +8,6 @@ import javax.inject.Inject
 class HelpUseCaseImpl @Inject constructor(
     private val helpRepository: HelpRepository
 ): HelpUseCase {
-    override suspend fun getHelps(): List<Help> {
-        return helpRepository.getHelps()
-    }
+    override suspend fun getHelps(): List<Help> =  helpRepository.getHelps()
 
 }

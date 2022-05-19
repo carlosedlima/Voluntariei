@@ -25,27 +25,40 @@ class ModeActivity : AppCompatActivity() {
         val mode:String = intent.extras?.get(MODE).toString()
 
         configLogin(mode)
-        binding.LoginEmail.setOnClickListener {
-            val i = Intent(this, MainActivity::class.java)
-            startActivity(i)
-        }
-
-        binding.MoreOptions.setOnClickListener {
-            val bottomSheet = BottomSheetFragment()
-            bottomSheet.show(supportFragmentManager,"BottomSheetDialog")
-        }
-
-        binding.Cadastrar.setOnClickListener {
-            val i = Intent(this, FormularyActivity::class.java)
-            i.putExtra(MODE,mode)
-            startActivity(i)
-        }
 
     }
 
     private fun configLogin(mode:String){
         if (mode == ONG){
             binding.MoreOptions.isGone = true
+            binding.LoginEmail.setOnClickListener {
+                val i = Intent(this, LoginActivity::class.java)
+                i.putExtra(MODE,mode)
+                startActivity(i)
+            }
+            binding.Cadastrar.setOnClickListener {
+                val i = Intent(this, FormularyActivity::class.java)
+                i.putExtra(MODE,mode)
+                startActivity(i)
+            }
+        }
+        else
+        {
+            binding.LoginEmail.setOnClickListener {
+                val i = Intent(this, LoginActivity::class.java)
+                startActivity(i)
+            }
+
+            binding.MoreOptions.setOnClickListener {
+                val bottomSheet = BottomSheetFragment()
+                bottomSheet.show(supportFragmentManager,"BottomSheetDialog")
+            }
+
+            binding.Cadastrar.setOnClickListener {
+                val i = Intent(this, FormularyActivity::class.java)
+                i.putExtra(MODE,mode)
+                startActivity(i)
+            }
         }
     }
 

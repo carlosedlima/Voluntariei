@@ -1,10 +1,14 @@
 package com.facens.acedevelop.voluntariei.data.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,16 +21,21 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object Request {
 
-
     private val request: Retrofit.Builder= Retrofit.Builder()
+
+    private val gson: Gson = GsonBuilder()
+        .setLenient()
+        .create()
 
     @Provides
     @Singleton
     fun providesRetrofit():Retrofit{
         return request
             .baseUrl("http://localhost:8090")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(OkHttpClient.Builder().run {
+                addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+                addInterceptor(InterceptorRequest())
                 callTimeout(10L, TimeUnit.SECONDS)
                 connectTimeout(10L, TimeUnit.SECONDS)
                 readTimeout(10L, TimeUnit.SECONDS)
@@ -45,20 +54,19 @@ object Request {
     }
 
 
-//    private class InterceptorRequest : Interceptor {
-//        override fun intercept(chain: Interceptor.Chain): Response {
-//            return chain.proceed(chain.request().newBuilder().run {
-//                if (chain.request().header("content-type") == null)
-//                    addHeader("content-type", "application/json")
-//
-//                if (chain.request().header("accept") == null)
-//                    addHeader("accept", "application/json")
-//
-//                addHeader("app-version", "Ab${BuildConfig.VERSION_CODE}v${BuildConfig.VERSION_NAME}")
-//                build()
-//            })
-//        }
-//    }
+    private class InterceptorRequest : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+            return chain.proceed(chain.request().newBuilder().run {
+                if (chain.request().header("content-type") == null)
+                    addHeader("content-type", "application/json")
+
+                if (chain.request().header("accept") == null)
+                    addHeader("accept", "application/json")
+
+                build()
+            })
+        }
+    }
 //
 //    private class AuthenticateInterceptor : Authenticator {
 //        override fun authenticate(route: Route?, response: Response): Request? {
