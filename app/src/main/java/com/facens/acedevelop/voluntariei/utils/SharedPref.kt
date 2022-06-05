@@ -14,7 +14,8 @@ class SharedPref private constructor() {
         private val DOCUMENTO = "usuario_cpf"
         private val MODO = "modo_usuario"
         private val EMAIL = "email_usuario"
-
+        private val ID = "id_usuario"
+        private val ISONG = "ong"
 
 
         fun getInstance(context: Context): SharedPref {
@@ -67,6 +68,18 @@ class SharedPref private constructor() {
             .apply()
     }
 
+    val userId:Int?
+        get() = sharedPreferences.getInt(ID,0)
+
+    fun removeId(){
+        sharedPreferences.edit().remove(ID).apply()
+    }
+
+    fun saveID(id:Int){
+        sharedPreferences.edit()
+            .putInt(ID,id)
+            .apply()
+    }
 
     val isFirstLogin:Boolean
         get()= sharedPreferences.getBoolean(MODO,true)
@@ -79,6 +92,15 @@ class SharedPref private constructor() {
 
     fun clearAll() {
         sharedPreferences.edit().clear().apply()
+    }
+
+    val isOng:Boolean
+        get()= sharedPreferences.getBoolean(ISONG,false)
+
+    fun saveIsONG(placeObjStr: Boolean) {
+        sharedPreferences.edit()
+            .putBoolean(ISONG, placeObjStr)
+            .apply()
     }
 
 }

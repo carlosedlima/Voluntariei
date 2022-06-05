@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facens.acedevelop.voluntariei.databinding.MainFragmentBinding
 import com.facens.acedevelop.voluntariei.ui.home.adapter.EventsAdapter
+import com.facens.acedevelop.voluntariei.utils.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,9 +46,11 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.getEvents()
+        LoadingDialog.startLoadingDialog(requireContext())
     }
     private fun vmEvents(){
         viewModel.getEvent().observe(viewLifecycleOwner) {
+            LoadingDialog.dismissDialog()
             adapter.set(it)
         }
     }

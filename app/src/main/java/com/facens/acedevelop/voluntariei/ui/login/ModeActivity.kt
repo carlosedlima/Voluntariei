@@ -7,7 +7,6 @@ import androidx.core.view.isGone
 import com.facens.acedevelop.voluntariei.MainActivity
 import com.facens.acedevelop.voluntariei.R
 import com.facens.acedevelop.voluntariei.databinding.ActivityModeBinding
-import com.facens.acedevelop.voluntariei.ui.login.bottomsheet.BottomSheetFragment
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.MODE
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.ONG
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +29,6 @@ class ModeActivity : AppCompatActivity() {
 
     private fun configLogin(mode:String){
         if (mode == ONG){
-            binding.MoreOptions.isGone = true
             binding.LoginEmail.setOnClickListener {
                 val i = Intent(this, LoginActivity::class.java)
                 i.putExtra(MODE,mode)
@@ -47,11 +45,6 @@ class ModeActivity : AppCompatActivity() {
             binding.LoginEmail.setOnClickListener {
                 val i = Intent(this, LoginActivity::class.java)
                 startActivity(i)
-            }
-
-            binding.MoreOptions.setOnClickListener {
-                val bottomSheet = BottomSheetFragment()
-                bottomSheet.show(supportFragmentManager,"BottomSheetDialog")
             }
 
             binding.Cadastrar.setOnClickListener {

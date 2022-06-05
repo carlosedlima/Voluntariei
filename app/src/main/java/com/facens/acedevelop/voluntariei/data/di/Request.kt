@@ -31,7 +31,7 @@ object Request {
     @Singleton
     fun providesRetrofit():Retrofit{
         return request
-            .baseUrl("http://localhost:8090")
+            .baseUrl("https://voluntariei-backend.herokuapp.com")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(OkHttpClient.Builder().run {
                 addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })

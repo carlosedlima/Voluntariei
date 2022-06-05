@@ -50,16 +50,18 @@ class MainActivity : AppCompatActivity() {
         if (mode == "ONG"){
             val save:ONG = intent.extras?.get("Save") as ONG
 
-            sharedPref.getInstance(applicationContext).saveDoc(save.cnpj!!)
             sharedPref.getInstance(applicationContext).saveEmail(save.email!!)
             sharedPref.getInstance(applicationContext).saveNome(save.name!!)
             sharedPref.getInstance(applicationContext).saveIsFirstLogin(false)
+            sharedPref.getInstance(applicationContext).saveIsONG(true)
+            sharedPref.getInstance(applicationContext).saveID(save.id!!)
         }else{
             val save:User = intent.extras?.get("Save") as User
 
             sharedPref.getInstance(applicationContext).saveDoc(save.cpf)
             sharedPref.getInstance(applicationContext).saveEmail(save.email)
             sharedPref.getInstance(applicationContext).saveNome(save.name)
+            sharedPref.getInstance(applicationContext).saveID(save.id!!)
             sharedPref.getInstance(applicationContext).saveIsFirstLogin(false)
         }
 

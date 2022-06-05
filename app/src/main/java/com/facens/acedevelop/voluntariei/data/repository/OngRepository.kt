@@ -13,6 +13,8 @@ class OngRepository @Inject constructor(
 
     suspend fun getOng(id:Int): ONG = dataSource.getOng(id)
 
+    suspend fun updateOng(user:ONG):ONG = dataSource.updateOng(user)
+
     suspend fun deleteOng(id: Int): Boolean = dataSource.deleteOng(id)
 
     suspend fun loginOng(login: LoginRequest):ONG? = dataSource.login(login)

@@ -29,4 +29,7 @@
     <string name="Email">Email</string>
     <string name="Enter">Entrar</string>
     <string name="field_error">Campo obrigatório</string>
+    <string name="Event">Cadastre seu evento</string>
+    <string name="hint_event">Nome do evento</string>
+    <string name="Description">Descrição</string>
 </resources>

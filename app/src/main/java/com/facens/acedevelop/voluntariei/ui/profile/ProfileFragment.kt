@@ -56,13 +56,12 @@ class ProfileFragment : Fragment() {
             builder.setTitle("Deseja realmente deletar sua conta ?")
             builder.setPositiveButton("Sim") { dialog, _ ->
                 if (!SharedPref.getInstance(requireContext().applicationContext).isOng){
-                    viewModel.deleteUser(SharedPref.getInstance(requireContext().applicationContext).id)
+                    viewModel.deleteUser(SharedPref.getInstance(requireContext().applicationContext).userId!!)
                     SharedPref.getInstance(requireContext().applicationContext).clearAll()
                     startActivity(Intent(context,WelcomeActivity::class.java))
                     finishAffinity(requireActivity().parent);
-//                    exitProcess(0)
                 }
-                viewModel.deleteOng(SharedPref.getInstance(requireContext().applicationContext).id)
+                viewModel.deleteOng(SharedPref.getInstance(requireContext().applicationContext).userId!!)
                 startActivity(Intent(context,WelcomeActivity::class.java))
                 SharedPref.getInstance(requireContext().applicationContext).clearAll()
                 finishAffinity(requireActivity().parent);

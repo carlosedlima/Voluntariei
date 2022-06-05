@@ -59,10 +59,10 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
         binding.BotaoRegistrar.setOnClickListener {
             val nome = binding.NomeEvent.text.toString()
             val descricao = binding.Description.text.toString()
-            val id  = SharedPref.getInstance(requireContext().applicationContext).id
+            val id  = SharedPref.getInstance(requireContext().applicationContext).userId
             val dateString = binding.DataButton.text.toString()
             val date = stringToDate(dateString)
-            viewModel.registerEvento(nome,descricao,date,id)
+            viewModel.registerEvento(nome,descricao,date,id!!)
         }
 
         vmEvents()

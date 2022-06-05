@@ -22,7 +22,7 @@
         android:layout_height="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/MoreOptions"
+        app:layout_constraintBottom_toTopOf="@id/Cadastrar"
         android:layout_marginHorizontal="15dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/background_blue_button"
@@ -33,22 +33,6 @@
         android:textAllCaps="false"
         />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/MoreOptions"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/Cadastrar"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginBottom="22dp"
-        android:background="@drawable/background_blue_button"
-        android:text="@string/MoreOptions"
-        android:fontFamily="@font/share_tech"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/Cadastrar"

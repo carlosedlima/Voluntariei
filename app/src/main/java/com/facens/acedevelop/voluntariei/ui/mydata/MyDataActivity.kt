@@ -8,7 +8,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.facens.acedevelop.voluntariei.R
 import com.facens.acedevelop.voluntariei.databinding.ActivityMyDataBinding
-import com.facens.acedevelop.voluntariei.utils.LoadinDialog
+import com.facens.acedevelop.voluntariei.utils.LoadingDialog
 import com.facens.acedevelop.voluntariei.utils.SharedPref
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +56,7 @@ class MyDataActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        LoadinDialog.displayLoadingWithText(this)
+        LoadingDialog.startLoadingDialog(this)
     }
 
     private fun config(){
@@ -68,7 +68,7 @@ class MyDataActivity : AppCompatActivity() {
         else{
             binding.Email.setText(shared.getInstance(applicationContext).email)
             binding.Nome.setText(shared.getInstance(applicationContext).nome)
-
+            binding.DocumentoLayout.isGone = true
             binding.Documento.isGone = true
         }
     }

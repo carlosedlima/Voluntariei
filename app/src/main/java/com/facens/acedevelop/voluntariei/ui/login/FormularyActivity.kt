@@ -38,11 +38,10 @@ class FormularyActivity : AppCompatActivity() {
 
                 val name = binding.Nome.text.toString()
                 val email = binding.Email.text.toString()
-                val document = binding.Documento.text.toString()
                 val pass = binding.Senha.text.toString()
 
 
-                viewModel.createOng(name,email,pass,document)
+                viewModel.createOng(name,email,pass)
 
             }
         } else {

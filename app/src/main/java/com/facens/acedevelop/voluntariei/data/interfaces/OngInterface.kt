@@ -10,18 +10,18 @@ import retrofit2.http.*
 
 interface OngInterface {
 
-    @GET("/ong/{id}")
+    @GET("/ongs/{id}")
     fun getOng(@Path("id")id:Int):Call<MutableLiveData<ONG>>
 
-    @DELETE("/ong/{id}")
+    @DELETE("/ongs/{id}")
     fun deleteOng(@Path("id")id:Int):Call<MutableLiveData<Boolean>>
 
-    @POST("/ong")
+    @POST("/ongs")
     fun createOng(@Body ong:ONG): Call<MutableLiveData<Boolean>>
 
-    @PUT("/ong/{id}")
+    @PUT("/ongs/{id}")
     fun updateOng(@Path("id")id: Int):Call<MutableLiveData<ONG>>
 
-    @POST("/ong/login")
+    @POST("/ongs/login")
     fun loginOng(@Body login: LoginRequest):Call<ONG>
 }
