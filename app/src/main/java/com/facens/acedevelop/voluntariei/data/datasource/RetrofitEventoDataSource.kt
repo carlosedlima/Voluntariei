@@ -35,7 +35,15 @@ class RetrofitEventoDataSource @Inject constructor(
     }
 
     override suspend fun createEvent(evento: Evento): Evento {
-        TODO("Not yet implemented")
+        return suspendCoroutine { continuation ->
+            request.create(EventoInterface::class.java).createEvent(evento).listen(
+                onSuccess = { response ->
+                    if (response.isSuccessful){
+                        continuation.resumeWith(Result.success(evento))
+                    }
+                }
+            )
+        }
     }
 
     override suspend fun deleteEvent(evento: Evento) {

@@ -6,12 +6,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.facens.acedevelop.voluntariei.databinding.ProfileFragmentBinding
 import com.facens.acedevelop.voluntariei.ui.aboutapp.AboutActivity
 import com.facens.acedevelop.voluntariei.ui.help.HelpActivity
+import com.facens.acedevelop.voluntariei.ui.login.WelcomeActivity
 import com.facens.acedevelop.voluntariei.ui.mydata.MyDataActivity
+import com.facens.acedevelop.voluntariei.utils.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -20,11 +25,10 @@ class ProfileFragment : Fragment() {
         fun newInstance() = ProfileFragment()
     }
 
-    private lateinit var viewModel: ProfileViewModel
+    private val viewModel: ProfileViewModel by viewModels()
 
     private var _binding : ProfileFragmentBinding? = null
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +55,17 @@ class ProfileFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Deseja realmente deletar sua conta ?")
             builder.setPositiveButton("Sim") { dialog, _ ->
-                dialog.cancel()
+                if (!SharedPref.getInstance(requireContext().applicationContext).isOng){
+                    viewModel.deleteUser(SharedPref.getInstance(requireContext().applicationContext).id)
+                    SharedPref.getInstance(requireContext().applicationContext).clearAll()
+                    startActivity(Intent(context,WelcomeActivity::class.java))
+                    finishAffinity(requireActivity().parent);
+//                    exitProcess(0)
+                }
+                viewModel.deleteOng(SharedPref.getInstance(requireContext().applicationContext).id)
+                startActivity(Intent(context,WelcomeActivity::class.java))
+                SharedPref.getInstance(requireContext().applicationContext).clearAll()
+                finishAffinity(requireActivity().parent);
             }
             builder.setNegativeButton("Não") { dialog, _ ->
                 dialog.cancel()
@@ -64,7 +78,9 @@ class ProfileFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Deseja realmente sair de sua conta ?")
             builder.setPositiveButton("Sim") { dialog, _ ->
-                dialog.cancel()
+                SharedPref.getInstance(requireContext().applicationContext).clearAll()
+                startActivity(Intent(context,WelcomeActivity::class.java))
+
             }
             builder.setNegativeButton("Não") { dialog, _ ->
                 dialog.cancel()

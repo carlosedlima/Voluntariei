@@ -7,16 +7,16 @@ import retrofit2.http.*
 
 interface EventoInterface {
 
-    @GET("/evento")
+    @GET("/events")
     fun getEvent(): Call<MutableList<Evento>>
 
-    @POST("/evento")
-    fun createEvent():Call<MutableLiveData<Evento>>
+    @POST("/events")
+    fun createEvent(@Body event:Evento):Call<MutableLiveData<Evento>>
 
-    @PUT("/evento/{id}")
+    @PUT("/events/{id}")
     fun updateEvent(@Path("id") id:Int):Call<MutableLiveData<Evento>>
 
-    @DELETE("/evento/{id}")
+    @DELETE("/events/{id}")
     fun deleteEvent(@Path("id") id:Int):Call<MutableLiveData<Any>>
 
 }

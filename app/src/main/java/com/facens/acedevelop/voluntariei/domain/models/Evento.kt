@@ -8,5 +8,5 @@ data class Evento(
     @SerializedName("nome")val nome:String,
     @SerializedName("descricao")val descricao:String,
     @SerializedName("data")val data: Date,
-    @SerializedName("ong")val ong: ONG,
+    @SerializedName("ong_id")val ong: Int,
 ) :Serializable
