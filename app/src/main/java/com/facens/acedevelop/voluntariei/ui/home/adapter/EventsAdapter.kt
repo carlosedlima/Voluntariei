@@ -24,7 +24,7 @@ class EventsAdapter: BaseAdapter<EventsAdapter.EventHolder,Evento>() {
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         holder.binding.Nome.text = items[position].nome
-        holder.binding.Data.text = items[position].data.dateToString("dd-MM-yyyy")
+        holder.binding.Data.text = items[position].data.dateToString("dd/MM/yyyy")
         holder.binding.Descricao.text = items[position].descricao
     }
 

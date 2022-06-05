@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
             val events = eventoUseCase.getEvents()
             eventoList.value = events
         }catch (e:Exception){
-            Log.d("EventoViewModel",e.toString())
+            Log.e("EventoViewModel",e.toString())
         }
     }
 }

@@ -5,6 +5,7 @@ import java.io.Serializable
 import java.util.*
 
 data class Evento(
+    @SerializedName("id")val id:Int,
     @SerializedName("nome")val nome:String,
     @SerializedName("descricao")val descricao:String,
     @SerializedName("data")val data: Date,

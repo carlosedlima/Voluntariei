@@ -24,6 +24,7 @@ object Request {
     private val request: Retrofit.Builder= Retrofit.Builder()
 
     private val gson: Gson = GsonBuilder()
+        .setDateFormat("yyyy-MM-dd")
         .setLenient()
         .create()
 

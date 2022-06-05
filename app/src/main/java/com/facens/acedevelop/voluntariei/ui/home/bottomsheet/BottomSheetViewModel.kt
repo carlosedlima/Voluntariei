@@ -41,7 +41,7 @@ class BottomSheetViewModel @Inject constructor(
 
          if (isFormValid){
              try {
-                val event = Evento(nome,descricao,data,idOng)
+                val event = Evento(0,nome,descricao,data,idOng)
                  eventoUseCase.createEvent(event)
              }catch (e:Exception){
                  Log.d("BottomSheetViewModel",e.toString())
