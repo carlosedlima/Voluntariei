@@ -9,7 +9,6 @@ import com.facens.acedevelop.voluntariei.databinding.MainActivityBinding
 import com.facens.acedevelop.voluntariei.domain.models.ONG
 import com.facens.acedevelop.voluntariei.domain.models.User
 import com.facens.acedevelop.voluntariei.ui.home.HomeFragment
-import com.facens.acedevelop.voluntariei.ui.notifications.NotificationFragment
 import com.facens.acedevelop.voluntariei.ui.profile.ProfileFragment
 import com.facens.acedevelop.voluntariei.utils.Constantes
 import com.facens.acedevelop.voluntariei.utils.SharedPref
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.ic_home -> replaceFragment(HomeFragment())
-                R.id.ic_notification -> replaceFragment(NotificationFragment())
                 R.id.ic_profile -> replaceFragment(ProfileFragment())
             }
             true

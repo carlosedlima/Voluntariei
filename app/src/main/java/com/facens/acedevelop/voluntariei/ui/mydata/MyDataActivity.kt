@@ -56,7 +56,6 @@ class MyDataActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        LoadingDialog.startLoadingDialog(this)
     }
 
     private fun config(){

@@ -38,22 +38,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
 
         binding.DataButton.setOnClickListener {
 
-            val datePicker = DatePickerDialog(requireContext())
-
-            datePicker.setOnDateSetListener(DatePickerDialog.OnDateSetListener { _, ano, mes, dia ->
-                run {
-                    var mes = mes + 1
-                    var date: String = makeDateString(dia, mes, ano)
-                    binding.DataButton.setText(date)
-                }
-            })
-
-            var cal:Calendar = Calendar.getInstance()
-            var dia:Int = cal.get(Calendar.DAY_OF_MONTH)
-            var mes:Int = cal.get(Calendar.MONTH)
-            var ano:Int = cal.get(Calendar.YEAR)
-
-            datePicker.show()
+            datePickerCall()
         }
 
         binding.BotaoRegistrar.setOnClickListener {
@@ -66,10 +51,32 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
         }
 
         vmEvents()
-
+        todayDate()
     }
 
-    fun stringToDate(dateString:String):Date {
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun datePickerCall() {
+        val datePicker = DatePickerDialog(requireContext())
+
+        datePicker.setOnDateSetListener(DatePickerDialog.OnDateSetListener { _, ano, mes, dia ->
+            run {
+                val mes = mes + 1
+                val date: String = makeDateString(dia, mes, ano)
+                binding.DataButton.text = date
+            }
+        })
+
+        datePicker.show()
+    }
+
+    private fun todayDate(){
+        val cal:Calendar = Calendar.getInstance()
+        val dia:Int = cal.get(Calendar.DAY_OF_MONTH)
+        val mes:Int = cal.get(Calendar.MONTH)
+        val ano:Int = cal.get(Calendar.YEAR)
+        binding.DataButton.text = makeDateString(dia,mes,ano)
+    }
+    private fun stringToDate(dateString:String):Date {
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         val date = formatter.parse(dateString)
         return date

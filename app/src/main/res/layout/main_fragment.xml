@@ -7,67 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <View
-        android:id="@+id/ContainerSearch"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/background_search"
-        android:layout_margin="10dp"
-        />
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/IconLupa"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintTop_toTopOf="@id/ContainerSearch"
-        app:layout_constraintStart_toStartOf="@id/ContainerSearch"
-        app:layout_constraintBottom_toBottomOf="@id/ContainerSearch"
-        android:layout_margin="15dp"
-        app:srcCompat="@drawable/ic_lupa"
-        />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/Search"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toEndOf="@id/IconLupa"
-        app:layout_constraintEnd_toEndOf="@id/ContainerSearch"
-        app:layout_constraintTop_toTopOf="@id/ContainerSearch"
-        app:layout_constraintBottom_toBottomOf="@id/ContainerSearch"
-        android:fontFamily="@font/share_tech"
-        android:textColor="@color/black"
-        android:background="@android:color/transparent"
-        android:maxLines="1"
-        />
-
     <RelativeLayout
         android:id="@+id/Container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/ContainerSearch"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
+        app:layout_constraintStart_toStartOf="parent"
         >
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecyclerPrincipal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/card_evento"
-            />
+            tools:listitem="@layout/card_evento" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/Adicionar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            android:backgroundTint="@color/blue_2"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="20dp"
-            />
+            android:backgroundTint="@color/blue_2"
+            android:src="@drawable/ic_add" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ package com.facens.acedevelop.voluntariei.ui.login
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.facens.acedevelop.voluntariei.R
 import com.facens.acedevelop.voluntariei.databinding.ActivityFormularyBinding
 import com.facens.acedevelop.voluntariei.ui.login.viewmodels.RegisterViewModel
@@ -32,7 +34,8 @@ class FormularyActivity : AppCompatActivity() {
 
     private fun configScreen(mode: String) {
         if (mode == ONG) {
-            binding.DocumentoLayout.setHint(R.string.CNPJ)
+            binding.DocumentoLayout.isVisible = false
+            binding.Documento.isVisible = false
             binding.NomeLayout.setHint(R.string.NameOng)
             binding.Cadastrar.setOnClickListener {
 
@@ -42,7 +45,7 @@ class FormularyActivity : AppCompatActivity() {
 
 
                 viewModel.createOng(name,email,pass)
-
+                finish()
             }
         } else {
             binding.DocumentoLayout.setHint(R.string.CPF)
@@ -56,16 +59,12 @@ class FormularyActivity : AppCompatActivity() {
 
 
                 viewModel.createUser(name,email,pass,document)
-
+                finish()
             }
         }
     }
 
     private fun observerVMEvents() {
-        viewModel.documentFieldErrorResId.observe(this) { stringResId ->
-            binding.DocumentoLayout.setError(stringResId)
-        }
-
         viewModel.emailFieldErrorResId.observe(this) { stringResId ->
             binding.EmailLayout.setError(stringResId)
         }
@@ -74,9 +73,6 @@ class FormularyActivity : AppCompatActivity() {
         }
         viewModel.passFieldErrorResId.observe(this) { stringResId ->
             binding.SenhaLayout.setError(stringResId)
-        }
-        viewModel.documentFieldErrorResId.observe(this) { stringResId ->
-            binding.ConfirmarLayout.setError(stringResId)
         }
     }
 

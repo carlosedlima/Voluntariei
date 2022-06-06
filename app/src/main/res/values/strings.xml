@@ -32,4 +32,5 @@
     <string name="Event">Cadastre seu evento</string>
     <string name="hint_event">Nome do evento</string>
     <string name="Description">Descrição</string>
+    <string name="about">O <b>Voluntariei</b> é uma plataforma que serve para ONGs anunciarem eventos locais e procurarem por voluntários. \nUtilizando a ferramenta, as ONGs poderão se cadastrar na plataforma para anunciar seus eventos locais. \nA ferramenta também contará com o cadastro pela visão do usuário, podendo procurar eventos locais já cadastrados. Diante do meio que vivemos hoje, baseamos nosso projeto em objetivos de desenvolvimento sustentável da OMS, permitindo que as ONGs cadastrem quais ODSs elas apoiam.</string>
 </resources>
