@@ -23,5 +23,9 @@ O aplicativo Voluntariei permite que voluntários encontrem projetos de ONGs par
 - **Domínio**: Contém as interfaces de repositórios, casos de uso (use cases) e modelos de domínio.
 - **UI**: Contém as atividades, fragmentos, view models e componentes de interface do usuário.
 
+## Design
+
+O design do aplicativo pode ser visualizado no [Figma](https://www.figma.com/design/l28ADtabwVVgKIyY2kTRAG/Voluntariei?m=dev&node-id=203-32&t=jX3lsWrwubg0zUMp-1).
+
 https://github.com/carlosedlima/Voluntariei/assets/63886695/d6692404-f10d-459d-adb0-e1ae241fb220
 
