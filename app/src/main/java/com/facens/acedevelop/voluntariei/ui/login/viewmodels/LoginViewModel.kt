@@ -43,7 +43,7 @@ class LoginViewModel @Inject constructor(
 
         if (isFormValid){
             try {
-                val login = LoginRequest(email,pass)
+                val login = User(null, email = email, password = pass, name = "Teste", cpf = "47017867807")
                 val valid = userUseCase.login(login)
                 _userLogin.value = valid
             }catch (e: Exception){

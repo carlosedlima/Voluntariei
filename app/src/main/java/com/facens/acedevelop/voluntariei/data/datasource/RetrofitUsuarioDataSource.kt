@@ -1,14 +1,10 @@
 package com.facens.acedevelop.voluntariei.data.datasource
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.facens.acedevelop.voluntariei.data.datasource.interfaces.UsuarioDataSource
-import com.facens.acedevelop.voluntariei.data.di.Request
 import com.facens.acedevelop.voluntariei.data.di.Request.listen
 import com.facens.acedevelop.voluntariei.data.interfaces.OngInterface
 import com.facens.acedevelop.voluntariei.data.interfaces.UsuarioInterface
 import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
-import com.facens.acedevelop.voluntariei.domain.models.LoginResponse
 import com.facens.acedevelop.voluntariei.domain.models.User
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -63,9 +59,9 @@ class RetrofitUsuarioDataSource @Inject constructor(
         }
     }
 
-    override suspend fun login(login:LoginRequest): User? {
+    override suspend fun login(user: User): User? {
         return suspendCoroutine { continuation ->
-            request.create(UsuarioInterface::class.java).loginUser(login).listen(
+            request.create(UsuarioInterface::class.java).loginUser(user).listen(
                 onSuccess = { response ->
                     if (response.isSuccessful) {
                         val user:User? = response.body()

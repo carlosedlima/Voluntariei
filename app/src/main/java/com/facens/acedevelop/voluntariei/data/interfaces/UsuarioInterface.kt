@@ -10,15 +10,15 @@ import retrofit2.http.*
 
 interface UsuarioInterface {
 
-    @GET("/users/{id}")
+    @GET("/user/{id}")
     fun getUser(@Path("id")id:Int):Call<MutableLiveData<User>>
-    @DELETE("/users/{id}")
+    @DELETE("/user/{id}")
     fun deleteUser(@Path("id")id:Int):Call<MutableLiveData<Boolean>>
-    @POST("/users")
+    @POST("/user")
     fun createUser(@Body user: User): Call<MutableLiveData<Boolean>>
-    @PUT("/users/{id}")
+    @PUT("/user/{id}")
     fun updateUser(@Path("id")id: Int):Call<MutableLiveData<User>>
-    @POST("/users/login")
-    fun loginUser(@Body login: LoginRequest):Call<User?>
+    @GET("/user")
+    fun loginUser(@Body user: User):Call<User?>
 
 }

@@ -12,7 +12,7 @@ interface UsuarioDataSource {
 
     suspend fun deleteUser(id: Int):Boolean
 
-    suspend fun login(login:LoginRequest):User?
+    suspend fun login(user: User):User?
 
     suspend fun updateUser(user: User): User
 

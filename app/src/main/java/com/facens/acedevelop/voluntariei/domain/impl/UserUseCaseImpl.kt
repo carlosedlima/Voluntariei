@@ -19,6 +19,6 @@ class UserUseCaseImpl @Inject constructor(
 
     override suspend fun deleteUser(id: Int): Boolean = repository.deleteUser(id)
 
-    override suspend fun login(login:LoginRequest): User? = repository.loginUser(login)
+    override suspend fun login(user: User): User? = repository.loginUser(user)
 
 }

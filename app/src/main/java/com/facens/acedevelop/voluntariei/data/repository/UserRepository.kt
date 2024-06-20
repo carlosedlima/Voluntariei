@@ -17,5 +17,5 @@ class UserRepository @Inject constructor(
 
     suspend fun deleteUser(id: Int): Boolean = dataSource.deleteUser(id)
 
-    suspend fun loginUser(login:LoginRequest):User? = dataSource.login(login)
+    suspend fun loginUser(user: User):User? = dataSource.login(user)
 }

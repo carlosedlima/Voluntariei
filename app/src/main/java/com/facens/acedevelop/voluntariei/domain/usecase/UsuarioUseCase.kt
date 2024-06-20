@@ -13,5 +13,5 @@ interface UsuarioUseCase {
 
     suspend fun deleteUser(id: Int): Boolean
 
-    suspend fun login(login:LoginRequest): User?
+    suspend fun login(user: User): User?
 }

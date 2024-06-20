@@ -1,5 +1,6 @@
 package com.facens.acedevelop.voluntariei.data.di
 
+import com.facens.acedevelop.voluntariei.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -22,7 +23,7 @@ import javax.inject.Singleton
 object Request {
 
     private val request: Retrofit.Builder= Retrofit.Builder()
-
+    val apiUrl = BuildConfig.API_URL
     private val gson: Gson = GsonBuilder()
         .setDateFormat("yyyy-MM-dd")
         .setLenient()
@@ -32,7 +33,7 @@ object Request {
     @Singleton
     fun providesRetrofit():Retrofit{
         return request
-            .baseUrl("https://voluntariei-backend.herokuapp.com")
+            .baseUrl(apiUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(OkHttpClient.Builder().run {
                 addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
@@ -47,12 +48,7 @@ object Request {
     }
 
 
-    inline fun <T> Call<T>.listen(crossinline onSuccess: (response: Response<T>) -> Unit = {}, crossinline onError: (Throwable) -> Unit = {}) {
-        this.enqueue(object : Callback<T> {
-            override fun onResponse(call: Call<T>, response: Response<T>) = onSuccess.invoke(response)
-            override fun onFailure(call: Call<T>, t: Throwable) = onError.invoke(t)
-        })
-    }
+
 
 
     private class InterceptorRequest : Interceptor {
@@ -68,30 +64,5 @@ object Request {
             })
         }
     }
-//
-//    private class AuthenticateInterceptor : Authenticator {
-//        override fun authenticate(route: Route?, response: Response): Request? {
-//            val token = synchronized(this) { Shared.instance.token }
-//            val responseRefresh = create(AuthInterface::class.java).refreshToken(RefreshToken(token?.refreshToken ?: "")).execute()
-//            if (responseRefresh.isSuccessful) {
-//                val newToken = responseRefresh.body()
-//                synchronized(this) {
-//                    Shared.instance.token = newToken
-//                }
-//                return response.request.newBuilder()
-//                    .header("Authorization", newToken?.bearerToken ?: "")
-//                    .build()
-//            }
-//            return null
-//        }
-//    }
-
-//    private class ExcludeJson : ExclusionStrategy {
-//        override fun shouldSkipClass(clazz: Class<*>?): Boolean = false
-//
-//        override fun shouldSkipField(f: FieldAttributes?): Boolean {
-//            return f?.getAnnotation(Exclude::class.java) != null
-//        }
-//    }
 
 }

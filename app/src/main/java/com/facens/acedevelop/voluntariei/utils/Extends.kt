@@ -4,6 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 val ViewGroup.inflater: LayoutInflater
@@ -11,16 +14,13 @@ val ViewGroup.inflater: LayoutInflater
 
 fun ViewGroup.inflate(@LayoutRes layout: Int): View = inflater.inflate(layout, this, false)
 
-//fun ResponseBody.error(): RequestError? = try {
-//    Gson().fromJson(string(), RequestError::class.java)
-//} catch (error: Throwable) {
-//    null
-//}
+inline fun <T> Call<T>.listen(crossinline onSuccess: (response: Response<T>) -> Unit = {}, crossinline onError: (Throwable) -> Unit = {}) {
+    this.enqueue(object : Callback<T> {
+        override fun onResponse(call: Call<T>, response: Response<T>) = onSuccess.invoke(response)
+        override fun onFailure(call: Call<T>, t: Throwable) = onError.invoke(t)
+    })
+}
 
-
-/**
- * Verify if [String] is a validation email
- */
 val String.isEmail: Boolean
     get() = Pattern.compile(
         "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
