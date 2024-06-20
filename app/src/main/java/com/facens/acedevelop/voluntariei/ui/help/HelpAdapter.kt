@@ -1,17 +1,13 @@
 package com.facens.acedevelop.voluntariei.ui.help
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.facens.acedevelop.voluntariei.R
 import com.facens.acedevelop.voluntariei.databinding.CardTextBinding
 import com.facens.acedevelop.voluntariei.domain.models.Help
 import com.facens.acedevelop.voluntariei.utils.BaseAdapter
-import com.facens.acedevelop.voluntariei.utils.inflate
 
 class HelpAdapter :BaseAdapter<HelpAdapter.HelpViewHolder,Help>() {
-    //
 
     inner class HelpViewHolder(val binding: CardTextBinding) : RecyclerView.ViewHolder(binding.root)
 

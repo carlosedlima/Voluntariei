@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facens.acedevelop.voluntariei.databinding.MainFragmentBinding
+import com.facens.acedevelop.voluntariei.ui.eventdetails.EventDetailsActivity
 import com.facens.acedevelop.voluntariei.ui.home.adapter.EventsAdapter
 import com.facens.acedevelop.voluntariei.ui.home.bottomsheet.BottomSheetFragment
-import com.facens.acedevelop.voluntariei.ui.login.WelcomeActivity
 import com.facens.acedevelop.voluntariei.utils.LoadingDialog
 import com.facens.acedevelop.voluntariei.utils.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,6 +49,13 @@ class HomeFragment : Fragment() {
             val bottomSheet = BottomSheetFragment()
             bottomSheet.show(parentFragmentManager,"BottomSheetDialog")
         }
+
+        adapter.setOnItemClickListener {evento ->
+            val intent = Intent(context,  EventDetailsActivity::class.java)
+            intent.putExtra("eventoId", evento.id)
+            startActivity(intent)
+        }
+
     }
 
     override fun onResume() {

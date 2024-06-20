@@ -7,6 +7,9 @@ import androidx.annotation.LayoutRes
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import java.util.regex.Pattern
 
 val ViewGroup.inflater: LayoutInflater
@@ -32,9 +35,6 @@ val String.isEmail: Boolean
     ).matcher(this).matches()
 
 
-/**
- * Verify if [String] is a CPF
- */
 val String.isCPF: Boolean
     get() {
         val numbers = this.numbers()
@@ -56,14 +56,16 @@ val String.isCPF: Boolean
                 && (if (checkerSecond > 9) 0 else checkerSecond) == numbers[10].toString().toInt()
     }
 
-/**
- * Verify if [String] is equal to or greater than six
- */
 val String.isPassword: Boolean
     get() = this.length >= 6
 val String.isName: Boolean
     get() = Pattern.compile("_?[A-zÀ-ú]*").matcher(this.replace(" ", "")).matches()
-/**
- * Return string with only numbers
- */
+
 fun String.numbers(): String = this.replace(Regex("[^0-9]"), "")
+
+fun Date.dateToString(format: String): String {
+
+    val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
+
+    return dateFormatter.format(this)
+}

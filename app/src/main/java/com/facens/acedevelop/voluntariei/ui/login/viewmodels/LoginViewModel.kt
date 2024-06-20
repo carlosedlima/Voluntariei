@@ -7,10 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.facens.acedevelop.voluntariei.R
 import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
-import com.facens.acedevelop.voluntariei.domain.models.ONG
+import com.facens.acedevelop.voluntariei.domain.models.Ong
 import com.facens.acedevelop.voluntariei.domain.models.User
 import com.facens.acedevelop.voluntariei.domain.usecase.OngUseCase
-import com.facens.acedevelop.voluntariei.domain.usecase.UsuarioUseCase
+import com.facens.acedevelop.voluntariei.domain.usecase.UserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -18,14 +18,14 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val ongUseCase: OngUseCase,
-    private val userUseCase: UsuarioUseCase,
+    private val userUseCase: UserUseCase,
 ): ViewModel()  {
 
     private val _userLogin = MutableLiveData<User?>()
     val userLogin: LiveData<User?> = _userLogin
 
-    private val _ongLogged = MutableLiveData<ONG?>()
-    val ongLogged: LiveData<ONG?> = _ongLogged
+    private val _ongLogged = MutableLiveData<Ong?>()
+    val ongLogged: LiveData<Ong?> = _ongLogged
 
     private val _emailFieldErrorResId = MutableLiveData<Int>()
     val emailFieldErrorResId: LiveData<Int?> = _emailFieldErrorResId
@@ -43,7 +43,7 @@ class LoginViewModel @Inject constructor(
 
         if (isFormValid){
             try {
-                val login = User(null, email = email, password = pass, name = "Teste", cpf = "47017867807")
+                val login = LoginRequest(email,pass)
                 val valid = userUseCase.login(login)
                 _userLogin.value = valid
             }catch (e: Exception){

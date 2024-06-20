@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.facens.acedevelop.voluntariei.R
-import com.facens.acedevelop.voluntariei.domain.models.ONG
+import com.facens.acedevelop.voluntariei.domain.models.Ong
 import com.facens.acedevelop.voluntariei.domain.models.User
 import com.facens.acedevelop.voluntariei.domain.usecase.OngUseCase
-import com.facens.acedevelop.voluntariei.domain.usecase.UsuarioUseCase
+import com.facens.acedevelop.voluntariei.domain.usecase.UserUseCase
 import com.facens.acedevelop.voluntariei.utils.isCPF
 import com.facens.acedevelop.voluntariei.utils.isEmail
 import com.facens.acedevelop.voluntariei.utils.isName
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val ongUseCase: OngUseCase,
-    private val userUseCase:UsuarioUseCase,
+    private val userUseCase:UserUseCase,
 ) : ViewModel() {
 
     private val _errorRegisterOng = MutableLiveData<Int>()
@@ -47,8 +47,8 @@ class RegisterViewModel @Inject constructor(
     private val _userCreated = MutableLiveData<User>()
     val userCreated: LiveData<User> = _userCreated
 
-    private val _ongCreated = MutableLiveData<ONG>()
-    val ongCreated: LiveData<ONG> = _ongCreated
+    private val _ongCreated = MutableLiveData<Ong>()
+    val ongCreated: LiveData<Ong> = _ongCreated
 
     private var isFormValid = false
 
@@ -79,7 +79,7 @@ class RegisterViewModel @Inject constructor(
 
         if (isFormValid){
             try {
-                val ong = ongUseCase.registerOng(ONG(1,name,email,pass))
+                val ong = ongUseCase.registerOng(Ong(1,name,email,pass))
                 _ongCreated.value = ong
             }catch (e:Exception){
                 Log.d("RegisterUser",e.toString())

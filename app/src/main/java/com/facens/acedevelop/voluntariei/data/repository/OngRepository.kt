@@ -2,20 +2,19 @@ package com.facens.acedevelop.voluntariei.data.repository
 
 import com.facens.acedevelop.voluntariei.data.datasource.interfaces.OngDataSource
 import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
-import com.facens.acedevelop.voluntariei.domain.models.LoginResponse
-import com.facens.acedevelop.voluntariei.domain.models.ONG
+import com.facens.acedevelop.voluntariei.domain.models.Ong
 import javax.inject.Inject
 
 class OngRepository @Inject constructor(
     private val dataSource:OngDataSource
 ) {
-    suspend fun registerOng(user: ONG): ONG = dataSource.registerOng(user)
+    suspend fun registerOng(user: Ong): Ong = dataSource.registerOng(user)
 
-    suspend fun getOng(id:Int): ONG = dataSource.getOng(id)
+    suspend fun getOng(id:Int): Ong = dataSource.getOng(id)
 
-    suspend fun updateOng(user:ONG):ONG = dataSource.updateOng(user)
+    suspend fun updateOng(user:Ong):Ong = dataSource.updateOng(user)
 
     suspend fun deleteOng(id: Int): Boolean = dataSource.deleteOng(id)
 
-    suspend fun loginOng(login: LoginRequest):ONG? = dataSource.login(login)
+    suspend fun loginOng(login: LoginRequest):Ong? = dataSource.login(login)
 }

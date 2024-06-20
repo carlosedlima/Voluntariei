@@ -7,11 +7,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.facens.acedevelop.voluntariei.MainActivity
 import com.facens.acedevelop.voluntariei.databinding.ActivityLoginBinding
-import com.facens.acedevelop.voluntariei.domain.models.ONG
+import com.facens.acedevelop.voluntariei.domain.models.Ong
 import com.facens.acedevelop.voluntariei.domain.models.User
 import com.facens.acedevelop.voluntariei.ui.login.viewmodels.LoginViewModel
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.MODE
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.ONG
+import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.USER
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -64,14 +65,17 @@ class LoginActivity : AppCompatActivity() {
         viewModel.userLogin.observe(this){ result ->
             val user: User? = result
             if (user != null){
+                Toast.makeText(this,"Sucesso",Toast.LENGTH_SHORT).show()
                 val i = Intent(this, MainActivity::class.java)
+                i.putExtra(MODE, USER)
+                i.putExtra("Save",user)
                 startActivity(i)
             }else{
                 Toast.makeText(this,"Email ou senha invalido",Toast.LENGTH_SHORT).show()
             }
         }
         viewModel.ongLogged.observe(this){ result ->
-            val ong: ONG? = result
+            val ong: Ong? = result
             if (ong != null){
                 Toast.makeText(this,"Sucesso",Toast.LENGTH_SHORT).show()
                 val i = Intent(this, MainActivity::class.java)

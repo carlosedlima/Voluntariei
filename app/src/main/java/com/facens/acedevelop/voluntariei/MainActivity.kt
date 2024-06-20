@@ -1,12 +1,11 @@
 package com.facens.acedevelop.voluntariei
 
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.facens.acedevelop.voluntariei.databinding.MainActivityBinding
-import com.facens.acedevelop.voluntariei.domain.models.ONG
+import com.facens.acedevelop.voluntariei.domain.models.Ong
 import com.facens.acedevelop.voluntariei.domain.models.User
 import com.facens.acedevelop.voluntariei.ui.home.HomeFragment
 import com.facens.acedevelop.voluntariei.ui.profile.ProfileFragment
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configShared(mode:String){
         if (mode == "ONG"){
-            val save:ONG = intent.extras?.get("Save") as ONG
+            val save:Ong = intent.extras?.get("Save") as Ong
 
             sharedPref.getInstance(applicationContext).saveEmail(save.email!!)
             sharedPref.getInstance(applicationContext).saveNome(save.name!!)

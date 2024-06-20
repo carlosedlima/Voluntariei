@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.facens.acedevelop.voluntariei.R
-import com.facens.acedevelop.voluntariei.domain.models.Evento
-import com.facens.acedevelop.voluntariei.domain.usecase.EventoUseCase
+import com.facens.acedevelop.voluntariei.domain.models.Event
+import com.facens.acedevelop.voluntariei.domain.usecase.EventUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BottomSheetViewModel @Inject constructor(
-    val eventoUseCase: EventoUseCase
+    val eventUseCase: EventUseCase
 ): ViewModel() {
 
     private val _nameFieldErrorResId = MutableLiveData<Int>()
@@ -41,8 +41,8 @@ class BottomSheetViewModel @Inject constructor(
 
          if (isFormValid){
              try {
-                val event = Evento(0,nome,descricao,data,idOng)
-                 eventoUseCase.createEvent(event)
+                val event = Event(0,nome,descricao,data,idOng)
+                 eventUseCase.createEvent(event)
              }catch (e:Exception){
                  Log.d("BottomSheetViewModel",e.toString())
              }

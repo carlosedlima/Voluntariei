@@ -7,7 +7,7 @@ import retrofit2.http.GET
 interface HelpInterface {
 
 
-    @GET("/ajudas")
+    @GET("/help")
     fun getHelps(): Call<MutableList<Help>>
 
 }

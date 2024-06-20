@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.facens.acedevelop.voluntariei" >
+    package="com.facens.acedevelop.voluntariei">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,7 +12,10 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Voluntariei"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.eventdetails.EventDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
@@ -21,7 +24,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.splashscreen.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

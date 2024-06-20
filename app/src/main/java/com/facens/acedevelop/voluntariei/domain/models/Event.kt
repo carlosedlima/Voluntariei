@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.util.*
 
-data class Evento(
+data class Event(
     @SerializedName("id")val id:Int,
     @SerializedName("nome")val nome:String,
     @SerializedName("descricao")val descricao:String,

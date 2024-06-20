@@ -1,13 +1,12 @@
 package com.facens.acedevelop.voluntariei.data.repository
 
-import com.facens.acedevelop.voluntariei.data.datasource.interfaces.UsuarioDataSource
+import com.facens.acedevelop.voluntariei.data.datasource.interfaces.UserDataSource
 import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
-import com.facens.acedevelop.voluntariei.domain.models.LoginResponse
 import com.facens.acedevelop.voluntariei.domain.models.User
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
-    private val dataSource: UsuarioDataSource
+    private val dataSource: UserDataSource
 ) {
     suspend fun registerUser(user: User): User = dataSource.registerUser(user)
 
@@ -17,5 +16,5 @@ class UserRepository @Inject constructor(
 
     suspend fun deleteUser(id: Int): Boolean = dataSource.deleteUser(id)
 
-    suspend fun loginUser(user: User):User? = dataSource.login(user)
+    suspend fun loginUser(login:LoginRequest):User? = dataSource.login(login)
 }

@@ -4,7 +4,7 @@ import com.facens.acedevelop.voluntariei.data.datasource.interfaces.OngDataSourc
 
 import com.facens.acedevelop.voluntariei.data.interfaces.OngInterface
 import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
-import com.facens.acedevelop.voluntariei.domain.models.ONG
+import com.facens.acedevelop.voluntariei.domain.models.Ong
 import com.facens.acedevelop.voluntariei.utils.listen
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -13,7 +13,7 @@ import kotlin.coroutines.suspendCoroutine
 class RetrofitOngDataSource @Inject constructor(
     private val request: Retrofit
 ) : OngDataSource {
-    override suspend fun updateOng(user: ONG): ONG {
+    override suspend fun updateOng(user: Ong): Ong {
         return suspendCoroutine { continuation ->
             request.create(OngInterface::class.java).updateOng(user.id!!).listen(
                 onSuccess = { response ->
@@ -28,7 +28,7 @@ class RetrofitOngDataSource @Inject constructor(
         }
     }
 
-    override suspend fun registerOng(user: ONG): ONG {
+    override suspend fun registerOng(user: Ong): Ong {
         return suspendCoroutine { continuation ->
 
             request.create(OngInterface::class.java).createOng(user).listen(
@@ -45,12 +45,12 @@ class RetrofitOngDataSource @Inject constructor(
 
     }
 
-    override suspend fun getOng(id: Int): ONG {
+    override suspend fun getOng(id: Int): Ong {
         return suspendCoroutine { continuation ->
             request.create(OngInterface::class.java).getOng(id).listen(
                 onSuccess = { response ->
                     if (response.isSuccessful) {
-                        val user: ONG = response.body()?.value!!
+                        val user: Ong = response.body()?.value!!
                         continuation.resumeWith(Result.success(user))
                     }
                 },
@@ -76,12 +76,12 @@ class RetrofitOngDataSource @Inject constructor(
        }
     }
 
-    override suspend fun login(login: LoginRequest): ONG? {
+    override suspend fun login(login: LoginRequest): Ong? {
         return suspendCoroutine { continuation ->
             request.create(OngInterface::class.java).loginOng(login).listen(
                 onSuccess ={ response ->
                     if(response.isSuccessful){
-                        val ong: ONG? = response.body()
+                        val ong: Ong? = response.body()
                         continuation.resumeWith(Result.success(ong))
                     }
                 },

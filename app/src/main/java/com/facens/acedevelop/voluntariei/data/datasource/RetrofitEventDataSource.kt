@@ -1,22 +1,22 @@
 package com.facens.acedevelop.voluntariei.data.datasource
 
-import com.facens.acedevelop.voluntariei.data.datasource.interfaces.EventoDataSource
-import com.facens.acedevelop.voluntariei.data.interfaces.EventoInterface
-import com.facens.acedevelop.voluntariei.domain.models.Evento
+import com.facens.acedevelop.voluntariei.data.datasource.interfaces.EventDataSource
+import com.facens.acedevelop.voluntariei.data.interfaces.EventInterface
+import com.facens.acedevelop.voluntariei.domain.models.Event
 import com.facens.acedevelop.voluntariei.utils.listen
 import retrofit2.Retrofit
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
-class RetrofitEventoDataSource @Inject constructor(
+class RetrofitEventDataSource @Inject constructor(
     private val request:Retrofit
-) : EventoDataSource {
-    override suspend fun getEvents(): List<Evento> {
+) : EventDataSource {
+    override suspend fun getEvents(): List<Event> {
         return suspendCoroutine { continuation ->
-            request.create(EventoInterface::class.java).getEvent().listen(
+            request.create(EventInterface::class.java).getEvent().listen(
                 onSuccess = { response ->
                     if (response.isSuccessful){
-                        val events = mutableListOf<Evento>()
+                        val events = mutableListOf<Event>()
                         response.body()?.forEach { evento ->
                             events.add(evento)
                         }
@@ -31,19 +31,19 @@ class RetrofitEventoDataSource @Inject constructor(
         }
     }
 
-    override suspend fun createEvent(evento: Evento): Evento {
+    override suspend fun createEvent(event: Event): Event {
         return suspendCoroutine { continuation ->
-            request.create(EventoInterface::class.java).createEvent(evento).listen(
+            request.create(EventInterface::class.java).createEvent(event).listen(
                 onSuccess = { response ->
                     if (response.isSuccessful){
-                        continuation.resumeWith(Result.success(evento))
+                        continuation.resumeWith(Result.success(event))
                     }
                 }
             )
         }
     }
 
-    override suspend fun deleteEvent(evento: Evento) {
+    override suspend fun deleteEvent(event: Event) {
         TODO("Not yet implemented")
     }
 

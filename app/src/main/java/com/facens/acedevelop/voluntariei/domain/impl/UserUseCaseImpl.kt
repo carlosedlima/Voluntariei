@@ -2,14 +2,13 @@ package com.facens.acedevelop.voluntariei.domain.impl
 
 import com.facens.acedevelop.voluntariei.data.repository.UserRepository
 import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
-import com.facens.acedevelop.voluntariei.domain.models.LoginResponse
 import com.facens.acedevelop.voluntariei.domain.models.User
-import com.facens.acedevelop.voluntariei.domain.usecase.UsuarioUseCase
+import com.facens.acedevelop.voluntariei.domain.usecase.UserUseCase
 import javax.inject.Inject
 
 class UserUseCaseImpl @Inject constructor(
     private val repository: UserRepository
-): UsuarioUseCase {
+): UserUseCase {
 
     override suspend fun registerUser(user: User): User = repository.registerUser(user)
 
@@ -19,6 +18,6 @@ class UserUseCaseImpl @Inject constructor(
 
     override suspend fun deleteUser(id: Int): Boolean = repository.deleteUser(id)
 
-    override suspend fun login(user: User): User? = repository.loginUser(user)
+    override suspend fun login(login: LoginRequest): User? = repository.loginUser(login)
 
 }
