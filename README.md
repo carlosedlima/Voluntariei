@@ -4,7 +4,8 @@ Voluntariei é um aplicativo Android que conecta voluntários a oportunidades de
 
 ## Descrição
 
-O aplicativo Voluntariei permite que voluntários encontrem projetos de ONGs para participar, ajudando tanto as organizações quanto os voluntários a atingirem seus objetivos. O aplicativo utiliza uma arquitetura robusta e moderna, baseada em MVVM e Clean Architecture, para garantir um código escalável e de fácil manutenção.
+O aplicativo Voluntariei permite que voluntários encontrem projetos de ONGs para participar, ajudando tanto as organizações quanto os voluntários a atingirem seus objetivos. O aplicativo utiliza uma arquitetura
+baseada em MVVM e Clean Architecture, para garantir um código escalável e de fácil manutenção.
 
 ## Arquitetura
 
