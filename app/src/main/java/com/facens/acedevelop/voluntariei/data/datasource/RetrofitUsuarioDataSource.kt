@@ -1,11 +1,10 @@
 package com.facens.acedevelop.voluntariei.data.datasource
 
 import com.facens.acedevelop.voluntariei.data.datasource.interfaces.UsuarioDataSource
-import com.facens.acedevelop.voluntariei.data.di.Request.listen
 import com.facens.acedevelop.voluntariei.data.interfaces.OngInterface
 import com.facens.acedevelop.voluntariei.data.interfaces.UsuarioInterface
-import com.facens.acedevelop.voluntariei.domain.models.LoginRequest
 import com.facens.acedevelop.voluntariei.domain.models.User
+import com.facens.acedevelop.voluntariei.utils.listen
 import retrofit2.Retrofit
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine

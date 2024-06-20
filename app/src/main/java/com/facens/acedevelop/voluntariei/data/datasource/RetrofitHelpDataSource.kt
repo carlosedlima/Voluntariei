@@ -1,11 +1,10 @@
 package com.facens.acedevelop.voluntariei.data.datasource
 
 import android.util.Log
-import com.facens.acedevelop.voluntariei.data.di.Request
 import com.facens.acedevelop.voluntariei.data.datasource.interfaces.HelpDataSource
-import com.facens.acedevelop.voluntariei.data.di.Request.listen
 import com.facens.acedevelop.voluntariei.data.interfaces.HelpInterface
 import com.facens.acedevelop.voluntariei.domain.models.Help
+import com.facens.acedevelop.voluntariei.utils.listen
 import retrofit2.Retrofit
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
