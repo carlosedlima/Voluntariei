@@ -20,7 +20,7 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "API_URL", "\"https://619d3d93131c600017088e1b.mockapi.io/\""
+            buildConfigField "String", "API_URL", "\"\""
         }
 
         release {
