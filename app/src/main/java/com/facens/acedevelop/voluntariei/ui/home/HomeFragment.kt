@@ -1,6 +1,5 @@
 package com.facens.acedevelop.voluntariei.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facens.acedevelop.voluntariei.databinding.MainFragmentBinding
-import com.facens.acedevelop.voluntariei.ui.eventdetails.EventDetailsActivity
 import com.facens.acedevelop.voluntariei.ui.home.adapter.EventsAdapter
 import com.facens.acedevelop.voluntariei.ui.home.bottomsheet.BottomSheetFragment
 import com.facens.acedevelop.voluntariei.utils.LoadingDialog
@@ -27,7 +25,7 @@ class HomeFragment : Fragment() {
     private var _binding : MainFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
-    private val adapter = EventsAdapter()
+    private lateinit var adapter: EventsAdapter
     private val shared = SharedPref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +39,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        adapter = EventsAdapter(requireContext())
+
         binding.RecyclerPrincipal.adapter = adapter
         binding.RecyclerPrincipal.layoutManager = LinearLayoutManager(context)
         vmEvents()
@@ -49,13 +49,6 @@ class HomeFragment : Fragment() {
             val bottomSheet = BottomSheetFragment()
             bottomSheet.show(parentFragmentManager,"BottomSheetDialog")
         }
-
-        adapter.setOnItemClickListener {evento ->
-            val intent = Intent(context,  EventDetailsActivity::class.java)
-            intent.putExtra("eventoId", evento.id)
-            startActivity(intent)
-        }
-
     }
 
     override fun onResume() {

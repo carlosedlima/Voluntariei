@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.facens.acedevelop.voluntariei.databinding.BottomsheetMoreOptionsBinding
@@ -15,7 +14,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 @AndroidEntryPoint
 class BottomSheetFragment : BottomSheetDialogFragment(){
@@ -47,7 +47,9 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
             val id  = SharedPref.getInstance(requireContext().applicationContext).userId
             val dateString = binding.DataButton.text.toString()
             val date = stringToDate(dateString)
-            viewModel.registerEvento(nome,descricao,date,id!!)
+            if (date != null) {
+                viewModel.registerEvento(nome,descricao,date,id!!)
+            }
         }
 
         vmEvents()
@@ -58,13 +60,13 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
     private fun datePickerCall() {
         val datePicker = DatePickerDialog(requireContext())
 
-        datePicker.setOnDateSetListener(DatePickerDialog.OnDateSetListener { _, ano, mes, dia ->
+        datePicker.setOnDateSetListener { _, ano, mes, dia ->
             run {
                 val mes = mes + 1
                 val date: String = makeDateString(dia, mes, ano)
                 binding.DataButton.text = date
             }
-        })
+        }
 
         datePicker.show()
     }
@@ -76,7 +78,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
         val ano:Int = cal.get(Calendar.YEAR)
         binding.DataButton.text = makeDateString(dia,mes,ano)
     }
-    private fun stringToDate(dateString:String):Date {
+    private fun stringToDate(dateString:String): Date? {
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         val date = formatter.parse(dateString)
         return date

@@ -54,7 +54,7 @@ class ProfileFragment : Fragment() {
         binding.DeleteAccountButton.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Deseja realmente deletar sua conta ?")
-            builder.setPositiveButton("Sim") { dialog, _ ->
+            builder.setPositiveButton("Sim") { _, _ ->
                 if (!SharedPref.getInstance(requireContext().applicationContext).isOng){
                     viewModel.deleteUser(SharedPref.getInstance(requireContext().applicationContext).userId!!)
                     SharedPref.getInstance(requireContext().applicationContext).clearAll()
@@ -76,7 +76,7 @@ class ProfileFragment : Fragment() {
         binding.QuitButton.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Deseja realmente sair de sua conta ?")
-            builder.setPositiveButton("Sim") { dialog, _ ->
+            builder.setPositiveButton("Sim") { _, _ ->
                 SharedPref.getInstance(requireContext().applicationContext).clearAll()
                 startActivity(Intent(context,WelcomeActivity::class.java))
 
