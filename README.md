@@ -28,7 +28,7 @@ baseada em MVVM e Clean Architecture, para garantir um código escalável e de f
 
 O design do aplicativo pode ser visualizado no [Figma](https://www.figma.com/design/l28ADtabwVVgKIyY2kTRAG/Voluntariei?m=dev&node-id=203-32&t=jX3lsWrwubg0zUMp-1).
 ## Api
-Esse é o repositório da [API](https://github.com/seuusuario/repo-do-aplicativo).
+Esse é o repositório da [API](https://github.com/carlosedlima/voluntariei-api).
 
 https://github.com/carlosedlima/Voluntariei/assets/63886695/d6692404-f10d-459d-adb0-e1ae241fb220
 
