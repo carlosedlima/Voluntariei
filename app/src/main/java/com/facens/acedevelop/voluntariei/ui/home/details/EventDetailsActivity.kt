@@ -1,4 +1,4 @@
-package com.facens.acedevelop.voluntariei.ui.eventdetails
+package com.facens.acedevelop.voluntariei.ui.home.details
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.facens.acedevelop.voluntariei.databinding.CardEventoBinding
 import com.facens.acedevelop.voluntariei.domain.models.Event
-import com.facens.acedevelop.voluntariei.ui.eventdetails.EventDetailsActivity
+import com.facens.acedevelop.voluntariei.ui.home.details.EventDetailsActivity
 import com.facens.acedevelop.voluntariei.utils.BaseAdapter
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.EVENT_ID
 import com.facens.acedevelop.voluntariei.utils.dateToString
