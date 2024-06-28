@@ -20,7 +20,7 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "API_URL", "\"https://voluntariei-api.onrender.com\""
+            buildConfigField "String", "API_URL", "\"\""
         }
 
         release {
