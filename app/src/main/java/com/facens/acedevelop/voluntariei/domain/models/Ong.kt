@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Ong (
-    @SerializedName("id")  val id:Int? = 0,
+    @SerializedName("id")  val id:Long? = 0,
     @SerializedName("nome")  val name:String?,
     @SerializedName("email") val email:String?,
     @SerializedName("senha") val password:String?,

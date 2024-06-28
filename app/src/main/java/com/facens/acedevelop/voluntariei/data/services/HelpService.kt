@@ -1,10 +1,10 @@
-package com.facens.acedevelop.voluntariei.data.interfaces
+package com.facens.acedevelop.voluntariei.data.services
 
 import com.facens.acedevelop.voluntariei.domain.models.Help
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface HelpInterface {
+interface HelpService {
 
 
     @GET("/help")

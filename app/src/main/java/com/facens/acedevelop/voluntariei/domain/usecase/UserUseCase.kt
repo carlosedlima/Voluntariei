@@ -8,9 +8,9 @@ interface UserUseCase {
 
     suspend fun updateUser(user:User):User
 
-    suspend fun getUser(id: Int): User
+    suspend fun getUser(id: Long): User
 
-    suspend fun deleteUser(id: Int): Boolean
+    suspend fun deleteUser(id: Long): Boolean
 
     suspend fun login(login:LoginRequest): User?
 }

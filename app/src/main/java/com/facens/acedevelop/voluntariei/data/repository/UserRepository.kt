@@ -12,9 +12,9 @@ class UserRepository @Inject constructor(
 
     suspend fun updateUser(user: User): User = dataSource.updateUser(user)
 
-    suspend fun getUser(id:Int): User = dataSource.getUser(id)
+    suspend fun getUser(id:Long): User = dataSource.getUser(id)
 
-    suspend fun deleteUser(id: Int): Boolean = dataSource.deleteUser(id)
+    suspend fun deleteUser(id: Long): Boolean = dataSource.deleteUser(id)
 
     suspend fun loginUser(login:LoginRequest):User? = dataSource.login(login)
 }

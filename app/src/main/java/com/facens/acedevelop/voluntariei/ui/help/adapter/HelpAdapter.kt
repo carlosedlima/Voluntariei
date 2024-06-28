@@ -29,7 +29,9 @@ class HelpAdapter(private val context: Context) :BaseAdapter<HelpAdapter.HelpVie
         holder.binding.Description.text = help.description
 
         holder.itemView.setOnClickListener {
+
             val intent = Intent(context, HelpDetailsActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 putExtra(HELP_ID, help)
             }
             context.startActivity(intent)

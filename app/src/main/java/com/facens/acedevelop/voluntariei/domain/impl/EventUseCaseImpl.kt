@@ -1,5 +1,4 @@
 package com.facens.acedevelop.voluntariei.domain.impl
-
 import com.facens.acedevelop.voluntariei.data.repository.EventRepository
 import com.facens.acedevelop.voluntariei.domain.models.Event
 import com.facens.acedevelop.voluntariei.domain.usecase.EventUseCase

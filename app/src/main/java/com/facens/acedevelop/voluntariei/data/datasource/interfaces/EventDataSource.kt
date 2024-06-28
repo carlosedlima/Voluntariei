@@ -8,5 +8,4 @@ interface EventDataSource {
 
     suspend fun createEvent(event: Event):Event
 
-    suspend fun deleteEvent(event: Event)
 }

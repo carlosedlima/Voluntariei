@@ -16,7 +16,7 @@ class ProfileViewModel @Inject constructor(
     private val userUseCase: UserUseCase,
 ): ViewModel() {
 
-    fun deleteUser(id:Int)=viewModelScope.launch{
+    fun deleteUser(id:Long)=viewModelScope.launch{
         try {
             userUseCase.deleteUser(id)
         }catch (e: Exception){
@@ -24,7 +24,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-     fun deleteOng(id:Int)=viewModelScope.launch{
+     fun deleteOng(id:Long)=viewModelScope.launch{
         try {
             ongUseCase.deleteOng(id)
         }catch (e: Exception){

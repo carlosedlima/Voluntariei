@@ -33,42 +33,49 @@ class LoginViewModel @Inject constructor(
     private val _passFieldErrorResId = MutableLiveData<Int>()
     val passFieldErrorResId: LiveData<Int?> = _passFieldErrorResId
 
+    private val _loginError = MutableLiveData<String?>()
+    val loginError: LiveData<String?> = _loginError
+
     private var isFormValid = false
 
-    fun loginUser(email:String,pass:String) = viewModelScope.launch{
-        isFormValid =true
+    fun loginUser(email: String, pass: String) = viewModelScope.launch {
+        validateForm(email, pass)
 
-        _emailFieldErrorResId.value = getErrorStringResIdIfEmpty(email)
-        _passFieldErrorResId.value = getErrorStringResIdIfEmpty(pass)
-
-        if (isFormValid){
+        if (isFormValid) {
             try {
-                val login = LoginRequest(email,pass)
+                val login = LoginRequest(email, pass)
                 val valid = userUseCase.login(login)
-                _userLogin.value = valid
-            }catch (e: Exception){
-                Log.d("LoginUser",e.toString())
+                _userLogin.postValue(valid)
+                _loginError.postValue(null)
+            } catch (e: Exception) {
+                Log.d("LoginUser", e.toString())
+                _loginError.postValue("Falha no login")
             }
         }
     }
 
-    fun loginOng(email:String,pass:String) = viewModelScope.launch{
-        isFormValid =true
+    fun loginOng(email: String, pass: String) = viewModelScope.launch {
+        validateForm(email, pass)
+
+        if (isFormValid) {
+            try {
+                val login = LoginRequest(email, pass)
+                val valid = ongUseCase.login(login)
+                _ongLogged.postValue(valid)
+                _loginError.postValue(null)
+            } catch (e: Exception) {
+                Log.d("LoginOng", e.toString())
+                _loginError.postValue("Falha no Login")
+            }
+        }
+    }
+
+    private fun validateForm(email: String, pass: String) {
+        isFormValid = true
 
         _emailFieldErrorResId.value = getErrorStringResIdIfEmpty(email)
         _passFieldErrorResId.value = getErrorStringResIdIfEmpty(pass)
-
-        if (isFormValid){
-            try {
-                    val login = LoginRequest(email,pass)
-                    val valid = ongUseCase.login(login)
-                    _ongLogged.value = valid
-            }catch (e: Exception){
-                Log.d("LoginOng",e.toString())
-            }
-        }
     }
-
 
     private fun getErrorStringResIdIfEmpty(value: String): Int? {
         return if (value.isEmpty()) {

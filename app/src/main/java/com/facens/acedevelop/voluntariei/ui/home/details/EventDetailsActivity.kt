@@ -6,7 +6,9 @@ import com.facens.acedevelop.voluntariei.databinding.ActivityEventDetailsBinding
 import com.facens.acedevelop.voluntariei.domain.models.Event
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.EVENT_ID
 import com.facens.acedevelop.voluntariei.utils.dateToString
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EventDetailsActivity : AppCompatActivity() {
 
 

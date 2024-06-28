@@ -13,9 +13,9 @@ class OngUseCaseImpl @Inject constructor(
 
     override suspend fun updateOng(user: Ong): Ong = ongRepository.updateOng(user)
 
-    override suspend fun getOng(id: Int): Ong = ongRepository.getOng(id)
+    override suspend fun getOng(id: Long): Ong = ongRepository.getOng(id)
 
-    override suspend fun deleteOng(id: Int): Boolean = ongRepository.deleteOng(id)
+    override suspend fun deleteOng(id: Long): Boolean = ongRepository.deleteOng(id)
 
     override suspend fun login(login: LoginRequest): Ong? = ongRepository.loginOng(login)
 

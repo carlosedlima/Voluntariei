@@ -37,4 +37,8 @@
     <string name="bem_vindo">Bem vindo!</string>
     <string name="email_ou_senha_invalido">Email ou senha invalido</string>
     <string name="email_ou_senha_invalid">Email ou senha invalidó</string>
+    <string name="confirmar_delete">Deseja realmente deletar sua conta ?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="confirmar_saida">Deseja realmente sair de sua conta ?</string>
 </resources>

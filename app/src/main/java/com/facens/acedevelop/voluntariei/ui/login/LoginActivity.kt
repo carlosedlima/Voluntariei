@@ -17,6 +17,7 @@ import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.SAVE
 import com.facens.acedevelop.voluntariei.utils.Constantes.KEY.USER
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.Serializable
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -34,61 +35,64 @@ class LoginActivity : AppCompatActivity() {
         val mode: String = intent.extras?.get(MODE).toString()
 
         configTela(mode)
-        obserVMEvents()
-
+        observeVMEvents()
     }
 
-    private fun configTela(mode:String){
-        if (mode == ONG){
-            binding.Logar.setOnClickListener {
-                val email = binding.Email.text.toString()
-                val pass = binding.Senha.text.toString()
+    private fun configTela(mode: String) {
+        binding.Logar.setOnClickListener {
+            val email = binding.Email.text.toString()
+            val pass = binding.Senha.text.toString()
 
+            if (mode == ONG) {
                 viewModel.loginOng(email, pass)
-            }
-        }
-        else
-            binding.Logar.setOnClickListener {
-                val email = binding.Email.text.toString()
-                val pass = binding.Senha.text.toString()
-
+            } else {
                 viewModel.loginUser(email, pass)
             }
+        }
     }
 
-    private fun obserVMEvents(){
+    private fun observeVMEvents() {
         viewModel.emailFieldErrorResId.observe(this) { stringResId ->
             binding.EmailLayout.setError(stringResId)
         }
+
         viewModel.passFieldErrorResId.observe(this) { stringResId ->
             binding.SenhaLayout.setError(stringResId)
         }
 
-        viewModel.userLogin.observe(this){ result ->
-            val user: User? = result
-            if (user != null){
-                Toast.makeText(this, getString(R.string.bem_vindo),Toast.LENGTH_SHORT).show()
-                val i = Intent(this, MainActivity::class.java)
-                i.putExtra(MODE, USER)
-                i.putExtra(SAVE,user)
-                startActivity(i)
-            }else{
-                Toast.makeText(this, getString(R.string.email_ou_senha_invalido),Toast.LENGTH_SHORT).show()
+        viewModel.userLogin.observe(this) { user ->
+            user?.let {
+                navigateToMainScreen(USER, it)
+            } ?: run {
+                Toast.makeText(this, getString(R.string.email_ou_senha_invalido), Toast.LENGTH_SHORT).show()
             }
         }
-        viewModel.ongLogged.observe(this){ result ->
-            val ong: Ong? = result
-            if (ong != null){
-                Toast.makeText(this,getString(R.string.email_ou_senha_invalido),Toast.LENGTH_SHORT).show()
-                val i = Intent(this, MainActivity::class.java)
-                i.putExtra(MODE, ONG)
-                i.putExtra("Save",ong)
-                startActivity(i)
-            }else{
-                Toast.makeText(this, getString(R.string.email_ou_senha_invalid),Toast.LENGTH_SHORT).show()
+
+        viewModel.ongLogged.observe(this) { ong ->
+            ong?.let {
+                navigateToMainScreen(ONG, it)
+            } ?: run {
+                Toast.makeText(this, getString(R.string.email_ou_senha_invalido), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.loginError.observe(this) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    private fun navigateToMainScreen(mode: String, entity: Any) {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            putExtra(MODE, mode)
+            putExtra(SAVE, entity as Serializable)
+        }
+        Toast.makeText(this,getString(R.string.bem_vindo),Toast.LENGTH_SHORT).show()
+        startActivity(intent)
+        finish()
+    }
+
 
     private fun TextInputLayout.setError(stringResId: Int?) {
         error = if (stringResId != null) {

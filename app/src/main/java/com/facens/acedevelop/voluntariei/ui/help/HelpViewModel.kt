@@ -16,16 +16,29 @@ class HelpViewModel @Inject constructor(
         private val helpUseCase: HelpUseCase
         ): ViewModel() {
 
-    private val helpList:MutableLiveData<List<Help>> = MutableLiveData<List<Help>>()
-    fun getHelp(): LiveData<List<Help>> = helpList
+    private val _helpList:MutableLiveData<List<Help>> = MutableLiveData()
 
+    val helpList:LiveData<List<Help>> get() = _helpList
+
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
+    val loading: LiveData<Boolean> get() = _loading
+
+    private val _error: MutableLiveData<String?> = MutableLiveData()
+    val error: LiveData<String?> get() = _error
 
     fun getHelps()= viewModelScope.launch{
+        _loading.postValue(true)
         try {
             val helps = helpUseCase.getHelps()
-            helpList.value = helps
-        }catch (e:Exception){
-            Log.d("HelpViewModel",e.toString())
+            _helpList.postValue(helps)
+            _error.postValue(null)
+
+        } catch (e : Exception){
+            Log.e("HelpViewModel", e.toString())
+            _error.postValue(e.message)
+
+        } finally {
+            _loading.postValue(false)
         }
     }
 

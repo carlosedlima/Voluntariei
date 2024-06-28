@@ -1,29 +1,32 @@
-package com.facens.acedevelop.voluntariei.ui.home.bottomsheet
+package com.facens.acedevelop.voluntariei.ui.bottomsheet
 
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.facens.acedevelop.voluntariei.databinding.BottomsheetMoreOptionsBinding
-import com.facens.acedevelop.voluntariei.utils.SharedPref
+import com.facens.acedevelop.voluntariei.data.local.SharedPref
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class BottomSheetFragment : BottomSheetDialogFragment(){
 
     private var _binding: BottomsheetMoreOptionsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel:BottomSheetViewModel by viewModels()
-
+    private val viewModel: BottomSheetViewModel by viewModels()
+    @Inject
+    lateinit var sharedPref: SharedPref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,13 +45,16 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
         }
 
         binding.BotaoRegistrar.setOnClickListener {
+
             val nome = binding.NomeEvent.text.toString()
             val descricao = binding.Description.text.toString()
-            val id  = SharedPref.getInstance(requireContext().applicationContext).userId
+            val ongId  = sharedPref.userId
+            Log.d("TESTE",""+ongId)
             val dateString = binding.DataButton.text.toString()
             val date = stringToDate(dateString)
+
             if (date != null) {
-                viewModel.registerEvento(nome,descricao,date,id!!)
+                viewModel.registerEvento(nome,descricao,date, ongId)
             }
         }
 
@@ -62,7 +68,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
 
         datePicker.setOnDateSetListener { _, ano, mes, dia ->
             run {
-                val mes = mes + 1
+                mes + 1
                 val date: String = makeDateString(dia, mes, ano)
                 binding.DataButton.text = date
             }

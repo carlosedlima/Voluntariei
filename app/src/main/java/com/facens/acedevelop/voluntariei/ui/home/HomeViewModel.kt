@@ -16,16 +16,26 @@ class HomeViewModel @Inject constructor(
     private val eventUseCase: EventUseCase
 ): ViewModel() {
 
-    private val eventList: MutableLiveData<List<Event>> = MutableLiveData<List<Event>>()
-    fun getEvent(): LiveData<List<Event>> = eventList
+    private val _eventList: MutableLiveData<List<Event>> = MutableLiveData()
+    val eventList: LiveData<List<Event>> get() = _eventList
 
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
+    val loading: LiveData<Boolean> get() = _loading
+
+    private val _error: MutableLiveData<String?> = MutableLiveData()
+    val error: LiveData<String?> get() = _error
 
     fun getEvents()= viewModelScope.launch{
+        _loading.postValue(true)
         try {
             val events = eventUseCase.getEvents()
-            eventList.value = events
-        }catch (e:Exception){
-            Log.e("EventoViewModel",e.toString())
+            _eventList.postValue(events)
+            _error.postValue(null)
+        } catch (e: Exception) {
+            Log.e("HomeViewModel", e.toString())
+            _error.postValue(e.message)
+        } finally {
+            _loading.postValue(false)
         }
     }
 }

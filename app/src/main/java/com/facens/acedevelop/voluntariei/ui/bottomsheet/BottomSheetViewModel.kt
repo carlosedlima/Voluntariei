@@ -1,4 +1,4 @@
-package com.facens.acedevelop.voluntariei.ui.home.bottomsheet
+package com.facens.acedevelop.voluntariei.ui.bottomsheet
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -32,16 +32,18 @@ class BottomSheetViewModel @Inject constructor(
 
     private var isFormValid = false
 
-     fun registerEvento(nome:String,descricao:String,data:Date,idOng:Int)= viewModelScope.launch {
+     fun registerEvento(nome:String,descricao:String,data:Date,idOng:Long)= viewModelScope.launch {
          isFormValid = true
 
          _nameFieldErrorResId.value = getErrorStringResIdIfEmpty(nome)
          _descricaoFieldErrorResId.value = getErrorStringResIdIfEmpty(descricao)
          _dataFieldErrorResId.value = getErrorDateResIdIfEmpty(data)
 
+         val id: Long = 0
+
          if (isFormValid){
              try {
-                val event = Event(0,nome,descricao,data,idOng)
+                val event = Event(id,nome,descricao,data,idOng)
                  eventUseCase.createEvent(event)
              }catch (e:Exception){
                  Log.d("BottomSheetViewModel",e.toString())

@@ -10,8 +10,9 @@ import com.facens.acedevelop.voluntariei.domain.models.User
 import com.facens.acedevelop.voluntariei.ui.home.HomeFragment
 import com.facens.acedevelop.voluntariei.ui.profile.ProfileFragment
 import com.facens.acedevelop.voluntariei.utils.Constantes
-import com.facens.acedevelop.voluntariei.utils.SharedPref
+import com.facens.acedevelop.voluntariei.data.local.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -19,7 +20,8 @@ class MainActivity : AppCompatActivity() {
     private var _binding: MainActivityBinding? = null
     private val binding get() = _binding!!
 
-    private val sharedPref = SharedPref
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         val mode: String = intent.extras?.get(Constantes.KEY.MODE).toString()
 
-        if(sharedPref.getInstance(applicationContext).isFirstLogin){
+        if(sharedPref.isFirstLogin){
             configShared(mode)
         }
 
@@ -47,19 +49,19 @@ class MainActivity : AppCompatActivity() {
         if (mode == "ONG"){
             val save:Ong = intent.extras?.get("Save") as Ong
 
-            sharedPref.getInstance(applicationContext).saveEmail(save.email!!)
-            sharedPref.getInstance(applicationContext).saveNome(save.name!!)
-            sharedPref.getInstance(applicationContext).saveIsFirstLogin(false)
-            sharedPref.getInstance(applicationContext).saveIsONG(true)
-            sharedPref.getInstance(applicationContext).saveID(save.id!!)
+            sharedPref.saveEmail(save.email!!)
+            sharedPref.saveNome(save.name!!)
+            sharedPref.saveIsFirstLogin(false)
+            sharedPref.saveIsOng(true)
+            sharedPref.saveUserId(save.id!!)
         }else{
             val save:User = intent.extras?.get("Save") as User
 
-            sharedPref.getInstance(applicationContext).saveDoc(save.cpf)
-            sharedPref.getInstance(applicationContext).saveEmail(save.email)
-            sharedPref.getInstance(applicationContext).saveNome(save.name)
-            sharedPref.getInstance(applicationContext).saveID(save.id!!)
-            sharedPref.getInstance(applicationContext).saveIsFirstLogin(false)
+            sharedPref.saveDocument(save.cpf)
+            sharedPref.saveEmail(save.email)
+            sharedPref.saveNome(save.name)
+            sharedPref.saveUserId(save.id!!)
+            sharedPref.saveIsFirstLogin(false)
         }
 
     }

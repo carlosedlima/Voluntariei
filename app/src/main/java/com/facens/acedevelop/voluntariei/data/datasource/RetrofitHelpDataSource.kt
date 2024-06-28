@@ -2,7 +2,7 @@ package com.facens.acedevelop.voluntariei.data.datasource
 
 import android.util.Log
 import com.facens.acedevelop.voluntariei.data.datasource.interfaces.HelpDataSource
-import com.facens.acedevelop.voluntariei.data.interfaces.HelpInterface
+import com.facens.acedevelop.voluntariei.data.services.HelpService
 import com.facens.acedevelop.voluntariei.domain.models.Help
 import com.facens.acedevelop.voluntariei.utils.listen
 import retrofit2.Retrofit
@@ -13,26 +13,24 @@ class RetrofitHelpDataSource @Inject constructor(
     private val request: Retrofit
 ) : HelpDataSource {
 
-     override suspend fun getHelps(): List<Help> {
-
+    override suspend fun getHelps(): List<Help> {
         return suspendCoroutine { continuation ->
-            request.create(HelpInterface::class.java).getHelps().listen(
-               onSuccess = { response ->
-                    if (response.isSuccessful){
-                        val helps = mutableListOf<Help>()
-                        response.body()?.forEach { help ->
-                            helps.add(help)
-                        }
+            val service = request.create(HelpService::class.java)
+            service.getHelps().listen(
+                onSuccess = { response ->
+                    if (response.isSuccessful) {
+                        val helps = response.body()?.toList() ?: emptyList()
                         continuation.resumeWith(Result.success(helps))
+                    } else {
+                        continuation.resumeWith(Result.failure(Exception("Erro ao recuperar as duvidas: ${response.code()} ${response.message()}")))
                     }
-               },
-               onError = {
-                   continuation.resumeWith(Result.failure(it))
-                   Log.d("HelpRequest", "GetError$it")
-               }
-           )
+                },
+                onError = { error ->
+                    continuation.resumeWith(Result.failure(error))
+                    Log.d("HelpRequest", "GetError: $error")
+                }
+            )
         }
-
     }
 
 }

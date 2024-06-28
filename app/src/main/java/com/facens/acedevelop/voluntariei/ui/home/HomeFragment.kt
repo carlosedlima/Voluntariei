@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facens.acedevelop.voluntariei.databinding.MainFragmentBinding
 import com.facens.acedevelop.voluntariei.ui.home.adapter.EventsAdapter
-import com.facens.acedevelop.voluntariei.ui.home.bottomsheet.BottomSheetFragment
+import com.facens.acedevelop.voluntariei.ui.bottomsheet.BottomSheetFragment
 import com.facens.acedevelop.voluntariei.utils.LoadingDialog
-import com.facens.acedevelop.voluntariei.utils.SharedPref
+import com.facens.acedevelop.voluntariei.data.local.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -26,7 +28,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var adapter: EventsAdapter
-    private val shared = SharedPref
+
+    @Inject
+    lateinit var sharedPref: SharedPref
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,26 +49,39 @@ class HomeFragment : Fragment() {
         binding.RecyclerPrincipal.layoutManager = LinearLayoutManager(context)
         vmEvents()
         config()
-        binding.Adicionar.setOnClickListener {
-            val bottomSheet = BottomSheetFragment()
-            bottomSheet.show(parentFragmentManager,"BottomSheetDialog")
-        }
+
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.getEvents()
-        LoadingDialog.startLoadingDialog(requireContext())
     }
-    private fun vmEvents(){
-        viewModel.getEvent().observe(viewLifecycleOwner) {
-            LoadingDialog.dismissDialog()
-            adapter.set(it)
+    private fun vmEvents() {
+        viewModel.eventList.observe(viewLifecycleOwner) { events ->
+            adapter.set(events)
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                LoadingDialog.startLoadingDialog(requireContext())
+            } else {
+                LoadingDialog.dismissDialog()
+            }
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            if (errorMessage != null) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun config(){
-        binding.Adicionar.isVisible = shared.getInstance(requireContext()).isOng
+        binding.Adicionar.isVisible = sharedPref.isOng
+        binding.Adicionar.setOnClickListener {
+            val bottomSheet = BottomSheetFragment()
+            bottomSheet.show(parentFragmentManager,"BottomSheetDialog")
+        }
     }
 
 }

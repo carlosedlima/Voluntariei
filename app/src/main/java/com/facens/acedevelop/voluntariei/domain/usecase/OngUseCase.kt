@@ -9,9 +9,9 @@ interface OngUseCase {
 
     suspend fun updateOng(user: Ong):Ong
 
-    suspend fun getOng(id: Int): Ong
+    suspend fun getOng(id: Long): Ong
 
-    suspend fun deleteOng(id: Int): Boolean
+    suspend fun deleteOng(id: Long): Boolean
 
     suspend fun login(login: LoginRequest): Ong?
 }
